@@ -1,0 +1,11 @@
+{
+  "name": "@next-dlrg-swim/zod-config",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@next-dlrg-swim/ts-config": "*"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  }
+}

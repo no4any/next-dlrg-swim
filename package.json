@@ -1,0 +1,30 @@
+{
+  "name": "next-dlrg-swim",
+  "private": true,
+  "workspaces": [
+    "packages/config/*",
+    "packages/libs/*",
+    "packages/apps/*"
+  ],
+  "version": "1.0.0",
+  "homepage": "https://github.com/no4any/next-dlrg-swim#readme",
+  "bugs": {
+    "url": "https://github.com/no4any/next-dlrg-swim/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/no4any/next-dlrg-swim.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "start:service": "npm run start --workspace=@next-dlrg-swim/service",
+    "dev:next": "npm run dev --workspace=@next-dlrg-swim/next",
+    "dev:trpc": "npm run dev --workspace=@next-dlrg-swim/trpc",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.7",
+    "vitest": "^4.1.7"
+  }
+}
