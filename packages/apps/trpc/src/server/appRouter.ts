@@ -1,5 +1,5 @@
+import { userRouter } from "./router/userRouter.ts";
 import { router } from "./trpc.ts";
-import { userRouter } from "./userRouter.ts";
 
 export const appRouter = router({
   user: userRouter,

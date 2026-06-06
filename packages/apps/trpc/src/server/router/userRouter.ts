@@ -1,5 +1,5 @@
 import { User, UserWithPassword } from '@next-dlrg-swim/models';
-import { publicProcedure, router } from './trpc.ts';
+import { publicProcedure, router } from '../trpc.ts';
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
 
@@ -13,6 +13,7 @@ export const userRouter = router({
             const user = opts.input;
             if (users.find(u => u.username === user.username)) throw new TRPCError({ code: 'CONFLICT', message: 'User already exists' });
             users.push(user);
+            console.log(users);
             return user;
         }),
     list: publicProcedure
