@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "./Button";
+import { SunIcon, MoonIcon } from "@heroicons/react/20/solid";
 
 const LOCAL_STORAGE_KEY_THEME = 'theme';
 const THEME_DARK = 'dark';
@@ -19,6 +20,6 @@ export function DarkToggle() {
     },[isDark])
 
     return <Button onClick={toggle}>
-        {isDark ? 'Dark' : 'Light'}
+        {isDark ? <SunIcon className="size-6" /> : <MoonIcon className="size-6" />}
     </Button>
 }
