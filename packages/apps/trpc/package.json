@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "type": "module",
-  "exports":{
+  "exports": {
     "./client": "./src/client/index.ts"
   },
   "scripts": {
@@ -15,7 +15,8 @@
   "dependencies": {
     "@next-dlrg-swim/models": "*",
     "@trpc/client": "^11.17.0",
-    "@trpc/server": "^11.17.0"
+    "@trpc/server": "^11.17.0",
+    "mongodb": "^7.3.0"
   },
   "devDependencies": {
     "@next-dlrg-swim/lint-config": "*",
