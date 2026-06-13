@@ -19,12 +19,14 @@
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "start:service": "npm run start --workspace=@next-dlrg-swim/service",
+    "dev": "concurrently -n \"trpc,next\" \"npm run dev:trpc\" \"npm run dev:next\"",
     "dev:next": "npm run dev --workspace=@next-dlrg-swim/next",
     "dev:trpc": "npm run dev --workspace=@next-dlrg-swim/trpc",
     "test": "vitest"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.1.7",
+    "concurrently": "^10.0.3",
     "vitest": "^4.1.7"
   }
 }
