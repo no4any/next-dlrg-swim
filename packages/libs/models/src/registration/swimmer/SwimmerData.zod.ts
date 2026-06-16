@@ -1,8 +1,10 @@
 import z from "zod";
 import { RegistrationStatus } from "./RegistrationStatus.zod.ts";
+import { MongoId } from "../../MongoId.zod.ts";
 
 export const SwimmerData = z.object({
-    status: RegistrationStatus,
+    _id: MongoId,
+    status: RegistrationStatus.optional(),
     firstName: z.string().min(2),
     lastName: z.string().min(2),
     gender: z.enum(["0", "M", "W"]).optional(),

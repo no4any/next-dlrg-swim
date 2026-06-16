@@ -1,14 +1,24 @@
-import { trpcClient } from "@next-dlrg-swim/trpc/client";
+import { Grid } from "@/components/grid/Grid.component";
+import { GridItem } from "@/components/grid/GridItem.component";
 
 export const revlidation = 0;
 
 export default async function AdminPage() {
-    const registration = await trpcClient.registration.register.mutate({
-        type: "TEAM",
-        email: "asdf@asdf.de"
-    })
-
-    return <div>
-        {JSON.stringify(registration)}
+    return <div className="bg-bg-menu/75 backdrop-blur-sm rounded-2xl p-3 m-5">
+        <div className="py-5">
+            <h1>Anmeldung zum 24 Stunden-Schwimmen der DLRG Gießen</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus nemo in cupiditate enim quisquam similique dolorem molestiae voluptatum! Assumenda esse totam, corrupti recusandae consequuntur quae fugiat hic magni exercitationem ullam?</p>
+        </div>
+        <Grid>
+            <GridItem>1</GridItem>
+            <GridItem>2</GridItem>
+            <GridItem>3</GridItem>
+            <GridItem>4</GridItem>
+            <GridItem>5</GridItem>
+            <GridItem>6</GridItem>
+            <GridItem>7</GridItem>
+            <GridItem>8</GridItem>
+            <GridItem>9</GridItem>
+        </Grid>
     </div>
 }

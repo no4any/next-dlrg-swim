@@ -1,33 +1,39 @@
 import { Registration } from '@next-dlrg-swim/models';
 import { publicProcedure, router } from '../trpc.ts';
-import { z } from 'zod';
-import { WithMongoId } from '../model/WithMongoId.zod.ts';
-import { client } from '../mongoClient.ts';
 import { TRPCError } from '@trpc/server';
+import { getCollection } from '../mongoClient.ts';
+import {z} from 'zod';
+
+const REGISTRATION_COLLECTION = process.env.REGISTRATION_COLLECTION || 'registration';
+
+const collection = (async () => {
+    const col = await getCollection<Registration>(REGISTRATION_COLLECTION);
+    col.createIndex({email: 1}, {unique: true});
+    return col;
+})()
 
 export const registrationRouter = router({
     register: publicProcedure
         .input(Registration)
-        .output(Registration)
+        .output(z.string())
         .mutation(async function (opts) {
-            const collection = (await client).db("dlrg").collection<Registration>("registration");
-            const result = await collection.insertOne(opts.input)
-            const inserted = await collection.findOne({
-                _id: result.insertedId
-            })
-
-            if(!inserted) {
+            const col = await collection;
+            const id = (await col.insertOne(opts.input)).insertedId?.toString();
+            if(!id) {
                 throw new TRPCError({
-                    code: 'NOT_FOUND'
+                    code: 'BAD_REQUEST'
                 })
             }
-
-            return Registration.parse(inserted);
+            return id;
         }),
-    addSwimmer: publicProcedure
+    getAll: publicProcedure
         .input(z.void())
-        .output(z.void())
-        .mutation(async function (opts) {}),
+        .output(z.array(Registration))
+        .query(async function () {
+            const col = await collection;
+            const result = z.array(Registration).parse(await col.find().toArray())
+            return result;
+        })
 });
 
 export type RegistrationRouter = typeof registrationRouter;
