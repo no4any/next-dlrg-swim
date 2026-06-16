@@ -1,3 +1,6 @@
+import { CheckBox } from "@/components/form/Checkbox.component";
+import { Input } from "@/components/form/Input.component";
+import { SubmitButton } from "@/components/form/SubmitButton";
 import { Grid } from "@/components/grid/Grid.component";
 import { GridItem } from "@/components/grid/GridItem.component";
 
@@ -10,9 +13,9 @@ export default async function AdminPage() {
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus nemo in cupiditate enim quisquam similique dolorem molestiae voluptatum! Assumenda esse totam, corrupti recusandae consequuntur quae fugiat hic magni exercitationem ullam?</p>
         </div>
         <Grid>
-            <GridItem>1</GridItem>
-            <GridItem>2</GridItem>
-            <GridItem>3</GridItem>
+            <GridItem><Input type="text" defaultValue={"Hallo Welt"}>Titel</Input></GridItem>
+            <GridItem><CheckBox>Hallo Welt</CheckBox></GridItem>
+            <GridItem><SubmitButton>Submit</SubmitButton></GridItem>
             <GridItem>4</GridItem>
             <GridItem>5</GridItem>
             <GridItem>6</GridItem>

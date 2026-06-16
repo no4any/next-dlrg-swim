@@ -22,6 +22,7 @@
     "dev": "concurrently -n \"trpc,next\" \"npm run dev:trpc\" \"npm run dev:next\"",
     "dev:next": "npm run dev --workspace=@next-dlrg-swim/next",
     "dev:trpc": "npm run dev --workspace=@next-dlrg-swim/trpc",
+    "dev:docker": "docker compose up",
     "test": "vitest"
   },
   "devDependencies": {
