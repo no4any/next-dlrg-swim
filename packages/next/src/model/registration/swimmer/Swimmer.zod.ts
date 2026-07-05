@@ -1,10 +1,10 @@
-import z from "zod";
-import { SwimmerData } from "./SwimmerData.zod";
-import { RegistrationType } from "../RegistrationType.zod";
+import {z} from "zod";
+import { ManagedSwimmer } from "./ManagedSwimmer.zod";
+import { SelfManagedSwimmer } from "./SelfManagedSwimmer.zod";
 
-export const Swimmer = SwimmerData.extend({
-    type: z.literal(RegistrationType.enum.INDIVIDUAL),
-    email: z.email(),
-})
+export const Swimmer = z.discriminatedUnion("type", [
+    SelfManagedSwimmer,
+    ManagedSwimmer
+]);
 
 export type Swimmer = z.infer<typeof Swimmer>;

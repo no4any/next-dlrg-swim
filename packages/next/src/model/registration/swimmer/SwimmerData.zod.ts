@@ -1,9 +1,9 @@
 import z from "zod";
 import { RegistrationStatus } from "./RegistrationStatus.zod";
-import { MongoId } from "../../MongoId.zod";
+import { MongoObjectId } from "../../MongoObjectId.zod";
 
 export const SwimmerData = z.object({
-    _id: MongoId,
+    _id: MongoObjectId.optional(),
     status: RegistrationStatus.optional(),
     firstName: z.string().min(2),
     lastName: z.string().min(2),

@@ -5,3 +5,5 @@ export const RegistrationStatus = z.enum([
     "REGISTERED",
     "FINISHED"
 ])
+
+export type RegistrationStatus = z.infer<typeof RegistrationStatus>;
