@@ -19,7 +19,7 @@ export async function registerTeam(initialState: {}, formData: FormData): Promis
         await addTeam(team);
     } catch (e) {
         if (e instanceof ZodError) {
-            return { fields: e.issues.map((issue) => issue.path[0].toString()) };
+            return { fields: e.issues.map((issue) => issue.path[0].toString()) as any };
         }
         const team = await getTeamByEMail(email || '')
         if (team) {
