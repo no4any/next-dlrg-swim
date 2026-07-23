@@ -17,6 +17,7 @@
   "scripts": {
     "build": "npm run build --workspace=@next-dlrg-swim/next",
     "start": "npm run start --workspace=@next-dlrg-swim/next",
-    "dev": "npm run dev --workspace=@next-dlrg-swim/next"
+    "dev": "npm run dev --workspace=@next-dlrg-swim/next",
+    "dev:docker": "docker compose up"
   }
 }

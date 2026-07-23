@@ -1,10 +1,10 @@
-import { TeamForm, TeamFormState } from "@/src/components/forms/TeamForm.component";
+import { TeamFormState } from "@/src/components/forms/TeamForm.component";
 import { Team } from "@/src/model";
 import { addTeam, getTeamByEMail, getTeamByName } from "@/src/mongo/team.mongo";
 import { redirect } from "next/navigation";
 import { ZodError } from "zod";
 
-export async function registerTeamAction(initialState: {}, formData: FormData): Promise<TeamFormState> {
+export async function registerTeam(initialState: {}, formData: FormData): Promise<TeamFormState> {
     "use server";
     let teamName, email;
     try {
@@ -31,12 +31,5 @@ export async function registerTeamAction(initialState: {}, formData: FormData): 
         }
         return { unknownError: true }
     }
-    redirect('/');
-}
-
-export default async function RegisterTeamPage() {
-    return <div>
-        <h1>Team Anmeldung</h1>
-        <TeamForm serverAction={registerTeamAction} />
-    </div>
+    redirect('/anmelden');
 }

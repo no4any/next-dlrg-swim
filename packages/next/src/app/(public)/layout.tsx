@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "../globals.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,9 +16,14 @@ export default function RootLayout({
       lang="en"
       className={`h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <div className="container mx-auto px-4 md:px-8 lg:px-16">
-          {children}
+      <body className="h-full">
+        <div className="container mx-auto px-4 md:px-8 lg:px-16 h-full flex flex-2 flex-col gap-2 py-1">
+          <div className="grow bg-white rounded-md p-3">
+            {children}
+          </div>
+          <div className="flow-none bg-white rounded-md p-3">
+            Footer
+          </div>
         </div>
       </body>
     </html>
