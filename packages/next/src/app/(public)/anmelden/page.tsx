@@ -1,3 +1,4 @@
+import { Button, ButtonError, ButtonInfo, ButtonSuccess } from "@/src/components/Button.component";
 import Link from "next/link";
 import React from "react";
 import { FaSwimmer, FaUber, FaUbuntu } from "react-icons/fa";

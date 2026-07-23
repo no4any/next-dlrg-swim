@@ -5,7 +5,7 @@ import { useActionState } from "react";
 import { Form } from "../Form";
 import { Input } from "../Input.component";
 import { Select } from "../Select.component";
-import { Button } from "../Button.component";
+import { ResetButton, SubmitButton } from "../Button.component";
 import { Hint } from "../Hint.component";
 import { HintBox } from "../HintBox.component";
 
@@ -35,7 +35,7 @@ export function TeamForm({ serverAction, team, submitButtonText }: { serverActio
             {state.emailAlreadyExists && <Hint type="ERROR">Die E-Mail wurde bereits verwendet um ein Team anzumelden.</Hint>}
             {state.teamNameAlreadyExists && <Hint type="ERROR">Der Teamname wurde bereits verwendet.</Hint>}
             {state.unknownError && <Hint type="ERROR">Ein Fehler ist aufgetreten. Probieren sie es später noch einmal.</Hint>}
-            {state.fields?.filter((field) => field !== "nameLower").map((field) => <Hint type="ERROR">{fieldToText(field)}</Hint>)}
+            {state.fields?.filter((field) => field !== "nameLower").map((field) => <Hint key={field} type="ERROR">{fieldToText(field)}</Hint>)}
         </HintBox>
         <Form action={formAction}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -48,8 +48,9 @@ export function TeamForm({ serverAction, team, submitButtonText }: { serverActio
                     </option>)}
                 </Select>
             </div>
-            <div className="pt-4">
-                <Button className="w-full" disabled={pending} type="submit">{submitButtonText || "Senden"} ({JSON.stringify(state)})</Button>
+            <div className="pt-4 grid grid-cols-2 gap-4">
+                <SubmitButton className="w-full" disabled={pending}>{submitButtonText || "Senden"}</SubmitButton>
+                <ResetButton color="RESET" className="w-full" disabled={pending}>Zurücksetzen</ResetButton>
             </div>
         </Form>
     </div>

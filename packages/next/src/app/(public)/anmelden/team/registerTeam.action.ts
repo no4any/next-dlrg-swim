@@ -4,7 +4,7 @@ import { addTeam, getTeamByEMail, getTeamByName } from "@/src/mongo/team.mongo";
 import { redirect } from "next/navigation";
 import { ZodError } from "zod";
 
-export async function registerTeam(initialState: {}, formData: FormData): Promise<TeamFormState> {
+export async function registerTeam(initialState: TeamFormState, formData: FormData): Promise<TeamFormState> {
     "use server";
     let teamName, email;
     try {
