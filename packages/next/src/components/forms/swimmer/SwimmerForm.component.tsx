@@ -45,7 +45,7 @@ export function SwimmerForm({ serverAction, swimmer, teamId, submitButtonText }:
                 <Select title="Geschlecht" name="gender" defaultValue={swimmer?.gender ?? "0"} disabled={pending}>
                     <option value="0">Keine Angabe</option>
                     <option value="W">Weiblich</option>
-                    <option value="0">Männlich</option>
+                    <option value="M">Männlich</option>
                 </Select>
             </div>
             <div className="flex flex-col gap-2 mt-4">

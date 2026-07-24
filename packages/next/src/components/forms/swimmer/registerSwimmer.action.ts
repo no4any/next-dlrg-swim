@@ -11,7 +11,7 @@ async function parseSwimmerFromFormData(formData: FormData, type: SwimmerType): 
         type: type,
         firstName: unparsedSwimmer.firstName?.toString() ?? "",
         lastName: unparsedSwimmer.lastName?.toString() ?? "",
-        email: unparsedSwimmer.email?.toString() ?? "",
+        email: unparsedSwimmer.email?.toString().toLocaleLowerCase() ?? "",
         birthday: unparsedSwimmer.birthday?.toString() || undefined,
         city: unparsedSwimmer.city?.toString() || undefined,
         breakfast: unparsedSwimmer.breakfast?.toString() === "on",
@@ -28,19 +28,18 @@ export async function registerSwimmer(_initialState: SwimmerFormState, formData:
         const swimmer = await parseSwimmerFromFormData(formData, "SELF_MANAGED");
         email = swimmer.email;
         await addSwimmer(swimmer);
-        redirect('/anmeldung/schwimmer/ok');
     } catch (e) {
         if (e instanceof ZodError) {
             return {
                 issues: e.issues.map((issue) => issue.message)
             };
         }
-        if(await getSwimmerByMail(email ?? "")) {
-            return {emailAlreadyExists: true}
+        if (await getSwimmerByMail(email ?? "")) {
+            return { emailAlreadyExists: true }
         }
         return {
             unknownError: true
         }
     }
-
+    redirect('/anmelden');
 }

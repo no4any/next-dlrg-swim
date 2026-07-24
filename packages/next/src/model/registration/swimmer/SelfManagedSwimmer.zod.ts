@@ -5,7 +5,7 @@ import { MongoObjectId } from "../../MongoObjectId.zod";
 
 export const SelfManagedSwimmer = SwimmerData.extend({
     type: z.literal(SwimmerType.enum.SELF_MANAGED),
-    email: z.email(),
+    email: z.email({ error: "Keine valide E-Mail" }),
     team: MongoObjectId.optional()
 })
 
