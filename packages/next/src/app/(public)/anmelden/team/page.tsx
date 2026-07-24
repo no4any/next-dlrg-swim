@@ -1,9 +1,9 @@
-import { TeamForm } from "@/src/components/forms/TeamForm.component";
-import { registerTeam } from "./registerTeam.action";
+import { registerTeam } from "@/src/components/forms/team/registerTeam.action";
+import { TeamForm } from "@/src/components/forms/team/TeamForm.component";
 
 export default async function RegisterTeamPage() {
     return <div>
-        <h1>Team Anmeldung</h1>
-        <TeamForm serverAction={registerTeam} />
+        <h1>Team anmeldung</h1>
+        <TeamForm serverAction={registerTeam} submitButtonText="Team anmelden"/>
     </div>
 }

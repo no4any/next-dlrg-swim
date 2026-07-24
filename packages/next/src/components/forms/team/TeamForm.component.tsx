@@ -2,12 +2,12 @@
 
 import { Team, TeamType } from "@/src/model";
 import { useActionState } from "react";
-import { Form } from "../Form";
-import { Input } from "../Input.component";
-import { Select } from "../Select.component";
-import { ResetButton, SubmitButton } from "../Button.component";
-import { Hint } from "../Hint.component";
-import { HintBox } from "../HintBox.component";
+import { HintBox } from "../../HintBox.component";
+import { Form } from "../../Form";
+import { Input } from "../../Input.component";
+import { Select } from "../../Select.component";
+import { SubmitButton } from "../../Button.component";
+import { Hint } from "../../Hint.component";
 
 export type FormAction<T> = (initialState: T, formData: FormData) => Promise<T>;
 
@@ -48,9 +48,8 @@ export function TeamForm({ serverAction, team, submitButtonText }: { serverActio
                     </option>)}
                 </Select>
             </div>
-            <div className="pt-4 grid grid-cols-2 gap-4">
+            <div className="pt-4 grid grid-cols-1 gap-4">
                 <SubmitButton className="w-full" disabled={pending}>{submitButtonText || "Senden"}</SubmitButton>
-                <ResetButton color="RESET" className="w-full" disabled={pending}>Zurücksetzen</ResetButton>
             </div>
         </Form>
     </div>

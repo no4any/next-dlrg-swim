@@ -5,6 +5,12 @@ import { getSwimmersCollection } from "./mongoClient";
 
 const collection = getSwimmersCollection();
 
+async function getSwimmerByMailRaw(email: string) {
+    return (await collection).findOne({email});
+}
+export const getSwimmerByMail = cache(getSwimmerByMailRaw);
+
+
 async function getAllSwimmersRaw() {
     return (await collection).find().toArray();
 }

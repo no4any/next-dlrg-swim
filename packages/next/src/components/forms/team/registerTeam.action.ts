@@ -1,8 +1,8 @@
-import { TeamFormState } from "@/src/components/forms/TeamForm.component";
 import { Team } from "@/src/model";
 import { addTeam, getTeamByEMail, getTeamByName } from "@/src/mongo/team.mongo";
 import { redirect } from "next/navigation";
 import { ZodError } from "zod";
+import { TeamFormState } from "./TeamForm.component";
 
 export async function registerTeam(initialState: TeamFormState, formData: FormData): Promise<TeamFormState> {
     "use server";

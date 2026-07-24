@@ -19,9 +19,9 @@ export default function RootLayout({
     >
       <body className="h-full">
         <div className="container mx-auto px-4 md:px-8 lg:px-16 h-full flex flex-2 flex-col gap-2 py-1">
-          <div className="grow bg-white rounded-md p-3">
+          <main className="grow bg-white rounded-md p-3">
             {children}
-          </div>
+          </main>
           <div className="flow-none bg-white rounded-md p-3">
             <Footer />
           </div>
