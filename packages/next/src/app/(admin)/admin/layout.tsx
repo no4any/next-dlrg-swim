@@ -17,14 +17,14 @@ export default function RootLayout({
       lang="en"
       className={`h-full antialiased`}
     >
-      <body className="h-full flex flex-col bg-white text-black">
-        <div className="flex md:flex-row flex-col relative gap-4">
+      <body className="h-full flex flex-col bg-dlrg-red text-black">
+        <div className="flex md:flex-row flex-col relative">
           {/* The sidebar wrapper must have h-screen and sticky */}
           <aside className="sticky top-0 md:h-screen shrink-0">
             <Sidebar />
           </aside>
 
-          <main className="flex-1 min-w-0">
+          <main className="flex-1 min-w-0 px-4 md:px-16 lg:px-32 bg-white grow min-h-screen">
             {children}
           </main>
         </div>

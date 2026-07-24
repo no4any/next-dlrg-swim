@@ -6,7 +6,7 @@ export default async function Home() {
   const swimmers = await getAllSwimmers();
 
   return <div>
-    <h1>Hello World</h1>
+    <h1>Dashboard</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro ratione dolorum consequuntur voluptatum eum, sit quisquam veniam, officia illum quas libero recusandae distinctio assumenda possimus facere quos nihil totam facilis.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro ratione dolorum consequuntur voluptatum eum, sit quisquam veniam, officia illum quas libero recusandae distinctio assumenda possimus facere quos nihil totam facilis.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro ratione dolorum consequuntur voluptatum eum, sit quisquam veniam, officia illum quas libero recusandae distinctio assumenda possimus facere quos nihil totam facilis.</p>
