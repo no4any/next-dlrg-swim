@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import { Footer } from "./Footer";
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default function RootLayout({
       lang="en"
       className={`h-full antialiased`}
     >
-      <body className="h-full">
+      <body className="h-full bg-dlrg-red text-black">
         <div className="container mx-auto px-4 md:px-8 lg:px-16 h-full flex flex-2 flex-col gap-2 py-1">
           <main className="grow bg-white rounded-md p-3">
             {children}

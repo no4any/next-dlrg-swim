@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../../globals.css";
+import { Sidebar } from "./Sidebar";
 
 export const metadata: Metadata = {
   title: "DLRG Admin",
@@ -16,9 +17,16 @@ export default function RootLayout({
       lang="en"
       className={`h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <div className="container mx-auto px-4 md:px-8 lg:px-16">
-          {children}
+      <body className="h-full flex flex-col bg-white text-black">
+        <div className="flex md:flex-row flex-col relative gap-4">
+          {/* The sidebar wrapper must have h-screen and sticky */}
+          <aside className="sticky top-0 md:h-screen shrink-0">
+            <Sidebar />
+          </aside>
+
+          <main className="flex-1 min-w-0">
+            {children}
+          </main>
         </div>
       </body>
     </html>
