@@ -5,23 +5,28 @@ import { ZodError } from "zod";
 import { TeamFormState } from "./TeamForm.component";
 import { generateHash } from "@/src/lib/generateHash.function";
 
-export async function registerTeam(initialState: TeamFormState, formData: FormData): Promise<TeamFormState> {
+async function parseTeamFromFormData(formData: FormData): Promise<Team> {
+    const unparsedTeam = Object.fromEntries(formData.entries());
+
+    return Team.parse({
+        ...unparsedTeam,
+        nameLower: unparsedTeam?.name.toString().toLowerCase(),
+        email: unparsedTeam?.email.toString().toLocaleLowerCase()
+    })
+}
+
+export async function registerTeam(_initialState: TeamFormState, formData: FormData): Promise<TeamFormState> {
     "use server";
     let teamName, email, id;
     try {
-        const unparsedTeam = Object.fromEntries(formData.entries());
-        const team = Team.parse({
-            ...unparsedTeam,
-            nameLower: unparsedTeam?.name.toString().toLowerCase(),
-            email: unparsedTeam?.email.toString().toLocaleLowerCase()
-        });
+        const team = await parseTeamFromFormData(formData);
         teamName = team.nameLower;
         email = team.email;
         const result = await addTeam(team);
         id = result.insertedId.toString();
     } catch (e) {
         if (e instanceof ZodError) {
-            return { fields: e.issues.map((issue) => issue.path[0].toString()) as any };
+            return { issues: e.issues.filter((issue) => issue.path[0].toString() !== 'nameLower').map((issue) => issue.message)};
         }
         const team = await getTeamByEMail(email || '')
         if (team) {

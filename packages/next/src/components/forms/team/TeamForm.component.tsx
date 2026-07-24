@@ -12,7 +12,7 @@ import { Hint } from "../../Hint.component";
 export type FormAction<T> = (initialState: T, formData: FormData) => Promise<T>;
 
 export type TeamFormState = {
-    fields?: Array<keyof Team>,
+    issues?: string[],
     emailAlreadyExists?: boolean,
     teamNameAlreadyExists?: boolean,
     unknownError?: boolean
@@ -35,7 +35,7 @@ export function TeamForm({ serverAction, team, submitButtonText }: { serverActio
             {state.emailAlreadyExists && <Hint type="ERROR">Die E-Mail wurde bereits verwendet um ein Team anzumelden.</Hint>}
             {state.teamNameAlreadyExists && <Hint type="ERROR">Der Teamname wurde bereits verwendet.</Hint>}
             {state.unknownError && <Hint type="ERROR">Ein Fehler ist aufgetreten. Probieren sie es später noch einmal.</Hint>}
-            {state.fields?.filter((field) => field !== "nameLower").map((field) => <Hint key={field} type="ERROR">{fieldToText(field)}</Hint>)}
+            {state.issues?.map((issue, index) => <Hint key={index} type="ERROR">{issue}</Hint>)}
         </HintBox>
         <Form action={formAction}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

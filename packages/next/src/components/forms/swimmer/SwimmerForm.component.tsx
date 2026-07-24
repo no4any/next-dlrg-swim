@@ -49,7 +49,7 @@ export function SwimmerForm({ serverAction, swimmer, teamId, submitButtonText }:
                 </Select>
             </div>
             <div className="flex flex-col gap-2 mt-4">
-                <CheckBox name="noPublishName" disabled={pending}><p>Ich möchte <span className="font-bold underline">NICHT</span> namentlich genannt werden <span className="font-bold italic text-dlrg-red">(Führt zum Ausschluss von allen Wertungen und Siegerehrungen)</span></p></CheckBox>
+                <CheckBox name="noPublishName" disabled={pending}><p>Ich möchte <span className="font-bold underline">NICHT</span> namentlich genannt werden <span className="font-bold italic text-dlrg-red">(Führt zum Ausschluss von allen Wertungen und Siegerehrungen - <span className="underline">Leistungen werden dem Team jedoch angerechnet</span>)</span></p></CheckBox>
                 <CheckBox name="breakfast" disabled={pending}><p>Ich möchte Frühstück <span className="font-bold italic text-dlrg-red">(6€ bei Anmeldung zusätzlich zu bezahlen)</span></p></CheckBox>
                 <CheckBox name="newsletter" disabled={pending}><p>Ich möchte per E-Mail über zukünfige Ereignisse informiert werden</p></CheckBox>
             </div>
