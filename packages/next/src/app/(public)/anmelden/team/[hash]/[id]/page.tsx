@@ -1,0 +1,36 @@
+import { Hint } from "@/src/components/Hint.component";
+import { HintBox } from "@/src/components/HintBox.component";
+import { generateHash } from "@/src/lib/generateHash.function";
+import { getGenderString } from "@/src/lib/getGenderString.function";
+import { getSwimmer } from "@/src/mongo/swimmer.mongo";
+import { getTeam } from "@/src/mongo/team.mongo";
+import { notFound } from "next/navigation";
+import React from "react";
+
+export default async function TeamPage({ params }: { params: Promise<{ id: string, hash: string }> }) {
+    const { id, hash } = await params;
+
+    console.log("asdf");
+    if (await generateHash(id) !== hash) notFound();
+
+    const team = await getTeam(id);
+
+    if (team === null) notFound()
+
+    return <div>
+        <h1>Übersicht zu Ihrer Team-Anmeldung</h1>
+        <div className="flow flex-col gap-4 mt-4">
+            <Detail title="Teamname">{team.name}</Detail>
+            <Detail title="Name des Managers">{team.managerName}</Detail>
+            <Detail title="E-Mail">{team.email}</Detail>
+            <Detail title="Art des Teams">{team.teamType}</Detail>
+        </div>
+    </div>
+}
+
+function Detail({ children, title }: { title: string | React.ReactElement, children: string | React.ReactNode }) {
+    return <div className="flex flex-row gap-4">
+        <div className="font-bold">{title}:</div>
+        <div>{children}</div>
+    </div>
+}

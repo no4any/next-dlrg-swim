@@ -8,8 +8,7 @@ export const Team = (z.object({
     email: z.email().max(255),
     name: z.string().min(3).max(255),
     nameLower: z.string().min(3).max(255),
-    managerName: z.string().min(3).max(255),
-    optIn: z.boolean().optional(),
+    managerName: z.string().min(3).max(255)
 }))
 
 export type Team = z.infer<typeof Team>;

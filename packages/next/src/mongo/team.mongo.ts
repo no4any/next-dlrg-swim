@@ -5,6 +5,11 @@ import { getTeamsCollection } from "./mongoClient";
 
 const collection = getTeamsCollection();
 
+async function getTeamRaw(id: string | ObjectId) {
+    return (await collection).findOne({_id: id instanceof ObjectId ? id : new ObjectId(id)});
+}
+export const getTeam = cache(getTeamRaw);
+
 async function getAllTeamsRaw() {
     return (await collection).find().toArray();
 }
