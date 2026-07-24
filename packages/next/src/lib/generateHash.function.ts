@@ -1,4 +1,5 @@
-const SALT = process.env.SALT || 'salt';
+import { SALT } from "../props";
+
 
 export async function generateHash(msg:string) {
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${SALT}${msg}`));

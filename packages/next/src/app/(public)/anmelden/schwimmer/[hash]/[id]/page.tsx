@@ -1,6 +1,8 @@
 import { Hint } from "@/src/components/Hint.component";
 import { HintBox } from "@/src/components/HintBox.component";
+import { dateToGermanDate } from "@/src/lib/dateToGermanyDate.function";
 import { generateHash } from "@/src/lib/generateHash.function";
+import { getAge } from "@/src/lib/getAge.function";
 import { getGenderString } from "@/src/lib/getGenderString.function";
 import { getSwimmer } from "@/src/mongo/swimmer.mongo";
 import { notFound } from "next/navigation";
@@ -32,7 +34,7 @@ export default async function SwimmerPage({ params }: { params: Promise<{ id: st
             <Detail title="Name">{swimmer?.firstName} {swimmer.lastName}</Detail>
             <Detail title="Geschlecht">{getGenderString(swimmer.gender)}</Detail>
             <Detail title="E-Mail">{swimmer.email}</Detail>
-            {swimmer.birthday && <Detail title="Geburtstag">{swimmer.birthday}</Detail>}
+            {swimmer.birthday && <Detail title="Geburtstag">{dateToGermanDate(new Date(swimmer.birthday))} ({getAge(new Date(swimmer.birthday))})</Detail>}
             {swimmer.city && <Detail title="Wohnort">{swimmer.city}</Detail>}
             <Detail title="Namen veröffentlichen">{!!swimmer.publishName ? "Ja" : "Nein"}</Detail>
             <Detail title="Frühstück">{!!swimmer.breakfast ? "Ja" : "Nein"}</Detail>
