@@ -1,6 +1,6 @@
 import { Document, MongoClient } from "mongodb";
 import { MONGO_CONNECTION_STRING } from "../props";
-import { Swimmer, Team } from "../model";
+import { Swimmer, Team, UserWithPassword } from "../model";
 
 const client = new MongoClient(MONGO_CONNECTION_STRING, {});
 
@@ -26,4 +26,10 @@ export async function getSwimmersCollection() {
     const swimmersCollection = await getCollection<Swimmer>('swimmers');
     await swimmersCollection.createIndex({ email: 1 }, { unique: true });
     return swimmersCollection;
+}
+
+export async function getUSersCollection() {
+    const usersCollection = await getCollection<UserWithPassword>('users');
+    await usersCollection.createIndex({ email: 1 }, { unique: true });
+    return usersCollection;
 }

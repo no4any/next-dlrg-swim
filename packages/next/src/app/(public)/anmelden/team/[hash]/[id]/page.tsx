@@ -1,21 +1,13 @@
-import { Hint } from "@/src/components/Hint.component";
-import { HintBox } from "@/src/components/HintBox.component";
 import { generateHash } from "@/src/lib/generateHash.function";
-import { getGenderString } from "@/src/lib/getGenderString.function";
-import { getSwimmer } from "@/src/mongo/swimmer.mongo";
 import { getTeam } from "@/src/mongo/team.mongo";
 import { notFound } from "next/navigation";
 import React from "react";
 
 export default async function TeamPage({ params }: { params: Promise<{ id: string, hash: string }> }) {
     const { id, hash } = await params;
-
-    console.log("asdf");
     if (await generateHash(id) !== hash) notFound();
-
     const team = await getTeam(id);
-
-    if (team === null) notFound()
+    if (!team) notFound()
 
     return <div>
         <h1>Übersicht zu Ihrer Team-Anmeldung</h1>

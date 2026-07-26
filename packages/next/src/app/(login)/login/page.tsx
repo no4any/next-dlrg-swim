@@ -1,9 +1,11 @@
+import LoginForm from "@/src/components/forms/login/LoginForm.component";
+import { Suspense } from "react";
+
 export default async function LoginPage() {
-    return <div className="w-3xl flex flex-row">
-        <div className="flex-1 min-h-128">
-            <h1>Login Page</h1>
-        </div>
-        <div className="flex-1 bg-[url(/dlrg.jpg)] rounded-r-md md:hidden">
-        </div>
+    return <div>
+        <h1 className="mb-4">Login Page</h1>
+        <Suspense fallback={<div>Loading...</div>}>
+            <LoginForm />
+        </Suspense>
     </div>
 }

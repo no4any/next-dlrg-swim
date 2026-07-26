@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../../globals.css";
 import { Sidebar } from "./Sidebar";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "DLRG Admin",
@@ -25,7 +26,9 @@ export default function RootLayout({
           </aside>
 
           <main className="flex-1 min-w-0 px-4 md:px-16 lg:px-32 bg-white grow min-h-screen">
-            {children}
+            <Suspense>
+              {children}
+            </Suspense>
           </main>
         </div>
       </body>

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaCalculator, FaSwimmer } from "react-icons/fa";
 import { GrGroup, GrUser } from "react-icons/gr";
+import { LuLogOut } from "react-icons/lu";
 
 export function Sidebar() {
     return <div className="md:h-full flex md:flex-col flex-row gap-4 bg-dlrg-red p-2">
@@ -24,6 +25,11 @@ export function Sidebar() {
             </SidebarLink>
         </div>
         <div className="flex flex-col gap-4 shrink md:border-t-2 md:border-t-dlrg-yellow md:pt-2">
+            <SidebarLink href="/admin/logout">
+                <div>
+                    <LuLogOut className="size-8" />
+                </div>
+            </SidebarLink>
             <SidebarLink href="/admin/user">
                 <div>
                     <GrUser className="size-8" />

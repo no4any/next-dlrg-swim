@@ -10,12 +10,9 @@ import React from "react";
 
 export default async function SwimmerPage({ params }: { params: Promise<{ id: string, hash: string }> }) {
     const { id, hash } = await params;
-
     if (await generateHash(id) !== hash) notFound();
-
     const swimmer = await getSwimmer(id);
-
-    if (swimmer == null) notFound()
+    if (!swimmer) notFound()
 
     return <div>
         <h1>Übersicht zu Ihrer Anmeldung</h1>

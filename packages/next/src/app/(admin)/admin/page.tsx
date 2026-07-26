@@ -1,12 +1,10 @@
-import { getAllSwimmers } from "@/src/mongo/swimmer.mongo";
-import { getAllTeams } from "@/src/mongo/team.mongo";
+import { getLogin } from "@/src/lib";
+
 
 export default async function Home() {
-  const teams = await getAllTeams();
-  const swimmers = await getAllSwimmers();
-
+  const user = await getLogin();
   return <div>
-    <h1>Dashboard</h1>
+    <h1>Dashboard ({user?.email})</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro ratione dolorum consequuntur voluptatum eum, sit quisquam veniam, officia illum quas libero recusandae distinctio assumenda possimus facere quos nihil totam facilis.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro ratione dolorum consequuntur voluptatum eum, sit quisquam veniam, officia illum quas libero recusandae distinctio assumenda possimus facere quos nihil totam facilis.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro ratione dolorum consequuntur voluptatum eum, sit quisquam veniam, officia illum quas libero recusandae distinctio assumenda possimus facere quos nihil totam facilis.</p>
