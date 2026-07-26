@@ -17,7 +17,7 @@ export default function RootLayout({
       className={`h-full antialiased`}
     >
       <body className="flex min-h-screen items-center justify-center h-full bg-dlrg-red text-black">
-        <div className="bg-white rounded-md p-4">{children}</div>
+        <div className="bg-white rounded-md m-4">{children}</div>
       </body>
     </html>
   );

@@ -25,7 +25,7 @@ export function Sidebar() {
                 </div>
             </SidebarLink>
         </div>
-        <div className="flex flex-col gap-4 shrink md:border-t-2 md:border-t-dlrg-yellow md:pt-2">
+        <div className="flex md:flex-col flex-row gap-4 shrink md:border-t-2 md:border-t-dlrg-yellow md:pt-2">
             <SidebarLink href="/admin/logout" prefetch={false}>
                 <div>
                     <LuLogOut className="size-8" />

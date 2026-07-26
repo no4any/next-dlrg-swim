@@ -1,6 +1,5 @@
 import { getLogin } from "@/src/lib";
 
-
 export default async function Home() {
   const user = await getLogin();
   return <div>
