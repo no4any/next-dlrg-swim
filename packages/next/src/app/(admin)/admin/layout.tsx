@@ -25,8 +25,8 @@ export default function RootLayout({
             <Sidebar />
           </aside>
 
-          <main className="flex-1 min-w-0 px-4 md:px-16 lg:px-32 bg-white grow min-h-screen">
-            <Suspense>
+          <main className="flex-1 min-w-0 px-4 md:px-16 lg:px-32 bg-white grow min-h-screen p-2">
+            <Suspense fallback={<div>Läd ...</div>}>
               {children}
             </Suspense>
           </main>

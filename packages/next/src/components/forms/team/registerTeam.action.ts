@@ -30,7 +30,6 @@ export async function registerTeam(_initialState: TeamFormState, formData: FormD
         }
         const team = await getTeamByEMail(email || '')
         if (team) {
-            console.log(team);
             return { emailAlreadyExists: true }
         }
         if (await getTeamByName(teamName || '')) {

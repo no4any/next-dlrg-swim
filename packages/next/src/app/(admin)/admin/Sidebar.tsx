@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaCalculator, FaSwimmer } from "react-icons/fa";
 import { GrGroup, GrUser } from "react-icons/gr";
@@ -16,7 +17,7 @@ export function Sidebar() {
                 <FaSwimmer className="size-8" />
             </SidebarLink>
             <SidebarLink href="/admin/teams">
-                    <GrGroup className="size-8" />
+                <GrGroup className="size-8" />
             </SidebarLink>
             <SidebarLink href="/admin/log">
                 <div>
@@ -25,11 +26,12 @@ export function Sidebar() {
             </SidebarLink>
         </div>
         <div className="flex flex-col gap-4 shrink md:border-t-2 md:border-t-dlrg-yellow md:pt-2">
-            <SidebarLink href="/admin/logout">
+            <SidebarLink href="/admin/logout" prefetch={false}>
                 <div>
                     <LuLogOut className="size-8" />
                 </div>
             </SidebarLink>
+
             <SidebarLink href="/admin/user">
                 <div>
                     <GrUser className="size-8" />
@@ -39,11 +41,11 @@ export function Sidebar() {
     </div>
 }
 
-function SidebarLink({ href, children }: { href: string, children: React.ReactNode }) {
+function SidebarLink({ href, children, prefetch }: { href: string, children: React.ReactNode, prefetch?:boolean }) {
     const pathname = usePathname();
-    const active = pathname === href ? {"data-active": true} : {}
+    const active = pathname === href ? { "data-active": true } : {}
 
-    return <Link href={href} {...active} className=" data-active:text-dlrg-yellow text-black bg-transparent rounded-md hover:bg-gray-400 p-1">
+    return <Link href={href} {...active} prefetch={prefetch} className=" data-active:text-dlrg-yellow text-black bg-transparent rounded-md hover:bg-gray-400 p-1">
         {children}
     </Link>
 }

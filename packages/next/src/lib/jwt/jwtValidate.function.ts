@@ -13,7 +13,7 @@ export async function jwtValidate(jwt: string) {
         });
         return payload;
     } catch (e) {
-        console.log("JWT validation failed", e);
+        console.log("JWT Validation fail");
     }
     return null;
 }
