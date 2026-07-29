@@ -1,6 +1,7 @@
 import z from "zod";
 import { TeamType } from "./TeamType.zod";
 import { MongoObjectId } from "../../MongoObjectId.zod";
+import { Swimmer } from "../swimmer";
 
 export const Team = (z.object({
     _id: MongoObjectId.optional(),

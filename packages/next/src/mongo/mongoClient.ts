@@ -2,10 +2,24 @@ import { Document, MongoClient } from "mongodb";
 import { MONGO_CONNECTION_STRING } from "../props";
 import { Swimmer, Team, UserWithPassword } from "../model";
 
-const client = new MongoClient(MONGO_CONNECTION_STRING, {});
+declare global {
+  var _mongoClientPromise: Promise<MongoClient> | undefined;
+}
 
-console.log("Connection to MongoDB");
-const mongoClient = client.connect();
+const client = new MongoClient(MONGO_CONNECTION_STRING, {});
+// const mongoClient = client.connect();
+let mongoClient:Promise<MongoClient>;
+
+if (process.env.NODE_ENV === 'development') {
+    if (!global._mongoClientPromise) {
+        console.log("Created MongoClient for DEV");
+        global._mongoClientPromise = client.connect()
+    }
+    mongoClient = global._mongoClientPromise
+} else {
+    console.log("Created MongoClient for PROD");
+    mongoClient = client.connect();
+}
 
 async function getDB(name: string = "dlrg") {
     return (await mongoClient).db(name);
