@@ -1,7 +1,6 @@
 import z from "zod";
 import { RegistrationStatus } from "./RegistrationStatus.zod";
 import { MongoObjectId } from "../../MongoObjectId.zod";
-import { Team } from "../team";
 
 export const SwimmerData = z.object({
     _id: MongoObjectId.optional(),
@@ -19,7 +18,6 @@ export const SwimmerData = z.object({
     capNr: z.number().min(1).max(100).optional(),
     regNr: z.number().min(1000).max(9999).optional(),
     newsletter: z.boolean().optional(),
-    team: Team.optional()
 })
 
 export type SwimmerData = z.infer<typeof SwimmerData>;

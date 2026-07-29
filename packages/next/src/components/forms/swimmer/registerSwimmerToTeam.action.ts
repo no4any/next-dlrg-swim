@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { addSwimmer, getSwimmerByMail } from "@/src/mongo/swimmer.mongo";
 import { ZodError } from "zod";
 import { generateHash } from "@/src/lib/generateHash.function";
+import { getTeam } from "@/src/mongo/team.mongo";
 
 async function parseSwimmerFromFormData(formData: FormData, type: SwimmerType): Promise<Swimmer> {
     const unparsedSwimmer = Object.fromEntries(formData.entries());
@@ -19,17 +20,20 @@ async function parseSwimmerFromFormData(formData: FormData, type: SwimmerType): 
         breakfast: unparsedSwimmer.breakfast?.toString() === "on",
         publishName: unparsedSwimmer.noPublishName?.toString() !== "on",
         newsletter: unparsedSwimmer.newsletter?.toString() === "on",
-        team: unparsedSwimmer.teamId ? new ObjectId(unparsedSwimmer.teamId.toString()) : undefined
+        teamId: unparsedSwimmer.teamId ? new ObjectId(unparsedSwimmer.teamId.toString()) : undefined
     })
 }
 
-export async function registerSwimmer(_initialState: SwimmerFormState, formData: FormData): Promise<SwimmerFormState> {
+export async function registerSwimmerToTeam(_initialState: SwimmerFormState, formData: FormData): Promise<SwimmerFormState> {
     "use server";
     let email, result;
     try {
         const swimmer = await parseSwimmerFromFormData(formData, "SELF_MANAGED");
         email = swimmer.email;
-        result = await addSwimmer(swimmer);
+        const teamId = new ObjectId(formData.get("teamId")?.toString());
+        const team = getTeam(teamId);
+        if(!team) return {unknownError: true}
+        result = await addSwimmer({...swimmer, teamId});
     } catch (e) {
         if (e instanceof ZodError) {
             return {

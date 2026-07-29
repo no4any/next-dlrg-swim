@@ -1,8 +1,8 @@
 import { dateToGermanDate, getAge, getGenderString } from "@/src/lib";
-import { Swimmer } from "@/src/model";
+import { Swimmer, Team } from "@/src/model";
 import Link from "next/link";
 
-export async function SwimmerList({ swimmers }: { swimmers: Swimmer[] }) {
+export async function SwimmerList({ swimmers }: { swimmers: (Swimmer & { team?: Team })[] }) {
     return <div className="grid grid-col-5 gap-1">
         <div className="flex flex-row gap-0-5 p-1 font-bold sticky">
             <div className="flex-1">Vorname</div>
@@ -13,7 +13,7 @@ export async function SwimmerList({ swimmers }: { swimmers: Swimmer[] }) {
             <div className="flex-1">Alter</div>
         </div>
         {swimmers.map((swimmer) => {
-            const birthday =  swimmer.birthday ? new Date(swimmer.birthday) : undefined;
+            const birthday = swimmer.birthday ? new Date(swimmer.birthday) : undefined;
             const teamname = swimmer.team ? swimmer.team.name : undefined;
             return <Link href={`/swimmers/${swimmer._id?.toString()}`} key={swimmer._id?.toString()}>
                 <div>

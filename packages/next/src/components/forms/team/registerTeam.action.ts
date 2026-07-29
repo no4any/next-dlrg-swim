@@ -37,5 +37,5 @@ export async function registerTeam(_initialState: TeamFormState, formData: FormD
         }
         return { unknownError: true }
     }
-    redirect(`/anmelden/team/${await generateHash(id)}/${id}`);
+    redirect(`/anmelden/team/${id}/${await generateHash(id)}`);
 }
