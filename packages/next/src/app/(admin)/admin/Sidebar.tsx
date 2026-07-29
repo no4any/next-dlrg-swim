@@ -10,31 +10,31 @@ import { LuLogOut } from "react-icons/lu";
 export function Sidebar() {
     return <div className="md:h-full flex md:flex-col flex-row gap-4 bg-dlrg-red p-2">
         <div className="flex md:flex-col flex-row gap-4 grow">
-            <SidebarLink href="/admin">
+            <SidebarLink href="/admin" prefetch={false}>
                 <AiOutlineDashboard className="size-8" />
             </SidebarLink>
-            <SidebarLink href="/admin/swimmers">
+            <SidebarLink href="/admin/swimmers" prefetch={false}>
                 <FaSwimmer className="size-8" />
             </SidebarLink>
-            <SidebarLink href="/admin/teams">
+            <SidebarLink href="/admin/teams" prefetch={false}>
                 <GrGroup className="size-8" />
             </SidebarLink>
-            <SidebarLink href="/admin/log">
+            <SidebarLink href="/admin/log" prefetch={false}>
                 <div>
                     <FaCalculator className="size-8" />
                 </div>
             </SidebarLink>
         </div>
         <div className="flex md:flex-col flex-row gap-4 shrink md:border-t-2 md:border-t-dlrg-yellow md:pt-2">
-            <SidebarLink href="/admin/logout" prefetch={false}>
+            <SidebarLink href="/admin/user" prefetch={false}>
                 <div>
-                    <LuLogOut className="size-8" />
+                    <GrUser className="size-8" />
                 </div>
             </SidebarLink>
 
-            <SidebarLink href="/admin/user">
+            <SidebarLink href="/admin/logout" prefetch={false}>
                 <div>
-                    <GrUser className="size-8" />
+                    <LuLogOut className="size-8" />
                 </div>
             </SidebarLink>
         </div>
