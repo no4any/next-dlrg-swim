@@ -15,10 +15,12 @@
   },
   "license": "MIT",
   "scripts": {
+    "setup":"npm run gen:keys && cp default.env .env",
     "build": "npm run build --workspace=@next-dlrg-swim/next",
     "start": "npm run start --workspace=@next-dlrg-swim/next",
     "dev": "npm run dev --workspace=@next-dlrg-swim/next",
-    "dev:docker": "docker compose up",
-    "gen:keys": "node keygen.js"
+    "dev:docker": "docker compose -f docker-compose.dev.yml up",
+    "gen:keys": "node keygen.js",
+    "prod": "docker compose up -d"
   }
 }

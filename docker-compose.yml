@@ -13,10 +13,10 @@ services:
     depends_on:
       - mongo
     environment:
-      DEFAULT_USER_EMAIL: admin@admin.com
-      DEFAULT_USER_PASSWORD: admin123
-      SALT: asdlfkjasöldfjöaslfLKJasdf
-      MONGO_CONNECTION_STRING: mongodb://mongo:mongo@mongo:27017
+      DEFAULT_USER_EMAIL: ${DEFAULT_USER_EMAIL}
+      DEFAULT_USER_PASSWORD: ${DEFAULT_USER_PASSWORD}
+      SALT: ${SALT}
+      MONGO_CONNECTION_STRING: ${MONGO_CONNECTION_STRING}
   nginx: 
     build: ./.docker/nginx
     restart: unless-stopped
@@ -26,4 +26,5 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /data/next-dlrg-swim/certs:/certs
+      - ${PATH_2_FULLCHAIN}:/certs/fullchain.pem
+      - ${PATH_2_PRIVATEKEY}:/certs/privkey.pem
