@@ -1,1 +1,1 @@
-docker run -it --rm --name certbot -p 80:80 -v /data/next-dlrg-swim/certs:/etc/letsencrypt certbot/certbot certonly -d <domain> --standalone
+docker run -it --rm --name certbot -p 80:80 -v /data/next-dlrg-swim/cert:/etc/letsencrypt certbot/certbot certonly -d <domain> --standalone
