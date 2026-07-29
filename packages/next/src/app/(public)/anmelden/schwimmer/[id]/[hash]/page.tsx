@@ -1,7 +1,7 @@
 import { Hint } from "@/src/components/Hint.component";
 import { HintBox } from "@/src/components/HintBox.component";
+import { generateHash } from "@/src/lib-server-only";
 import { dateToGermanDate } from "@/src/lib/dateToGermanyDate.function";
-import { generateHash } from "@/src/lib/generateHash.function";
 import { getAge } from "@/src/lib/getAge.function";
 import { getGenderString } from "@/src/lib/getGenderString.function";
 import { getSwimmer } from "@/src/mongo/swimmer.mongo";

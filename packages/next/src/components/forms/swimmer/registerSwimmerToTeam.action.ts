@@ -4,13 +4,14 @@ import { Swimmer, SwimmerType } from "@/src/model";
 import { redirect } from "next/navigation";
 import { addSwimmer, getSwimmerByMail } from "@/src/mongo/swimmer.mongo";
 import { ZodError } from "zod";
-import { generateHash } from "@/src/lib/generateHash.function";
 import { getTeam } from "@/src/mongo/team.mongo";
+import { generateHash } from "@/src/lib-server-only";
 
 async function parseSwimmerFromFormData(formData: FormData, type: SwimmerType): Promise<Swimmer> {
     const unparsedSwimmer = Object.fromEntries(formData.entries());
     return Swimmer.parse({
         type: type,
+        status: "ANNOUNCED",
         firstName: unparsedSwimmer.firstName?.toString() ?? "",
         lastName: unparsedSwimmer.lastName?.toString() ?? "",
         email: unparsedSwimmer.email?.toString().toLocaleLowerCase() ?? "",

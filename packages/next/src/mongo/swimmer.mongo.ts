@@ -2,7 +2,6 @@ import { cache } from "react";
 import { Swimmer } from "../model/registration/swimmer";
 import { ObjectId } from "mongodb";
 import { getSwimmersCollection } from "./mongoClient";
-import z from "zod";
 
 const collection = getSwimmersCollection();
 
@@ -34,18 +33,19 @@ async function getAllSwimmersRaw() {
 }
 export const getAllSwimmers = cache(getAllSwimmersRaw);
 
-async function addSwimmerRaw(swimmer: Swimmer) {
+export async function addSwimmer(swimmer: Swimmer) {
     return (await collection)?.insertOne(swimmer);
 }
-export const addSwimmer = cache(addSwimmerRaw);
 
-async function updateSwimmerRaw(id: ObjectId, swimmer: Partial<Swimmer>) {
+export async function updateSwimmer(id: ObjectId, swimmer: Partial<Swimmer>) {
     const {_id, ...restOfSwimmer} = Swimmer.parse(swimmer);
     return (await collection)?.updateOne({ _id: id }, { $set: restOfSwimmer });
 }
-export const  updateSwimmer = cache(updateSwimmerRaw);
 
-async function deleteSwimmerRaw(id: ObjectId) {
-    return (await collection)?.deleteOne({ _id: id });
+export async function deleteManagedSwimmer(id: ObjectId | string) {
+    return (await collection)?.deleteOne({ _id: typeof id === 'string' ? new ObjectId(id) : id, type: "MANAGED", status: "ANNOUNCED" });
 }
-export const deleteSwimmer = cache(deleteSwimmerRaw);
+
+export async function deleteSwimmer(id: ObjectId | string) {
+    return (await collection)?.deleteOne({ _id: typeof id === 'string' ? new ObjectId(id) : id, status: "ANNOUNCED"  });
+}

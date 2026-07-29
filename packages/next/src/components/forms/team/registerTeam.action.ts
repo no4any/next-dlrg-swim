@@ -3,7 +3,7 @@ import { addTeam, getTeamByEMail, getTeamByName } from "@/src/mongo/team.mongo";
 import { redirect } from "next/navigation";
 import { ZodError } from "zod";
 import { TeamFormState } from "./TeamForm.component";
-import { generateHash } from "@/src/lib/generateHash.function";
+import { generateHash } from "@/src/lib-server-only";
 
 async function parseTeamFromFormData(formData: FormData): Promise<Team> {
     const unparsedTeam = Object.fromEntries(formData.entries());
