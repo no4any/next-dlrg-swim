@@ -14,4 +14,4 @@ export const HEADER_USER_NAME = process.env.HEADER_USER_NAME ?? 'user';
 
 // Default user (on fresh setup)
 export const DEFAULT_USER_EMAIL = process.env.DEFAULT_USER_EMAIL ?? 'default@user.com';
-export const DEFAULT_USER_PASSWORD = process.env.DEFAULT_USER_EMAIL ?? "default123"
+export const DEFAULT_USER_PASSWORD = process.env.DEFAULT_USER_PASSWORD ?? "default123"
