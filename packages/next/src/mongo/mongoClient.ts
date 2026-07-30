@@ -3,12 +3,12 @@ import { MONGO_CONNECTION_STRING } from "../props";
 import { Swimmer, Team, UserWithPassword } from "../model";
 
 declare global {
-  var _mongoClientPromise: Promise<MongoClient> | undefined;
+    var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
 const client = new MongoClient(MONGO_CONNECTION_STRING, {});
 // const mongoClient = client.connect();
-let mongoClient:Promise<MongoClient>;
+let mongoClient: Promise<MongoClient>;
 
 if (process.env.NODE_ENV === 'development') {
     if (!global._mongoClientPromise) {
@@ -38,7 +38,10 @@ export async function getTeamsCollection() {
 
 export async function getSwimmersCollection() {
     const swimmersCollection = await getCollection<Swimmer>('swimmers');
-    await swimmersCollection.createIndex({ email: 1 }, { unique: true });
+    await swimmersCollection.createIndex({ email: 1 }, {
+        unique: true,
+        partialFilterExpression: { email: { $type: "string" } }
+    });
     return swimmersCollection;
 }
 
