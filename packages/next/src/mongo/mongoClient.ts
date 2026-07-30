@@ -38,7 +38,9 @@ export async function getTeamsCollection() {
 
 export async function getSwimmersCollection() {
     const swimmersCollection = await getCollection<Swimmer>('swimmers');
-    await swimmersCollection.createIndex({ email: 1 }, {
+    await swimmersCollection.createIndex({
+        email: 1
+    }, {
         unique: true,
         partialFilterExpression: { email: { $type: "string" } }
     });
