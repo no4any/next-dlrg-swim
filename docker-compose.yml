@@ -13,6 +13,7 @@ services:
     depends_on:
       - mongo
     environment:
+      DOMAIN: ${DOMAIN}
       DEFAULT_USER_EMAIL: ${DEFAULT_USER_EMAIL}
       DEFAULT_USER_PASSWORD: ${DEFAULT_USER_PASSWORD}
       SALT: ${SALT}

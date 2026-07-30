@@ -1,5 +1,8 @@
 import "server-only";
 
+// Global stuff
+export const DOMAIN = process.env.DOMAIN ?? "localhost";
+
 // Mongo parameters
 export const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING ?? "mongodb://mongo:mongo@localhost:27017";
 
