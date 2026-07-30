@@ -5,6 +5,7 @@ import { SwimmersList } from "./SwimmersList.component";
 import { validateHash } from "@/src/lib-server-only";
 import Link from "next/link";
 import { Button } from "@/src/components/Button.component";
+import { CopyToClipBox } from "@/src/components/CopyToClipBox.component";
 
 export default async function TeamPage({ params }: { params: Promise<{ id: string, hash: string }> }) {
     const { id, hash } = await params;
@@ -20,9 +21,19 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
             <Detail title="E-Mail">{team.email}</Detail>
             <Detail title="Art des Teams">{team.teamType}</Detail>
         </div>
-        <Link href={`/anmelden/team/${id}/${hash}/add`}>
-            <Button>Schwimmer hinzufügen</Button>
-        </Link>
+        <div>
+            <Link href={`/anmelden/team/${id}/${hash}/add`}>
+                <Button>Schwimmer unter Ihrer Verwaltung hinzufügen</Button>
+            </Link>
+        </div>
+        <div className="my-4 flex flex-row">
+            <div className="shrink">
+                <CopyToClipBox value={`/anmelden/schwimmer/${id}`} isPath />
+            </div>
+            <div className="grow ml-4">
+                <p className="italic">Teilen sie diesen Link mit Teammitgliedern die sich selber verwalten sollen. Schwimmer die sich selbst hinzufügen können nur bei der Registrierung vor Ort entfernt oder bearbeitet werden.</p>
+            </div>
+        </div>
         <h2 className="my-4">Angemeldete Teammitglieder</h2>
         <SwimmersList swimmers={team.swimmers.map((swimmer) => {
             return {

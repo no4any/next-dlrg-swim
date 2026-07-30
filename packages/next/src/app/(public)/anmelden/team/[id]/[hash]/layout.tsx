@@ -1,3 +1,4 @@
+import { Spinner } from "@/src/app/(admin)/admin/Spinner";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -11,7 +12,7 @@ export default function SuspenseLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    return <Suspense>
+    return <Suspense fallback={<Spinner />}>
         {children}
     </Suspense>;
 }

@@ -1,4 +1,5 @@
 import { dateToGermanDate, getAge, getGenderString } from "@/src/lib";
+import { generateHash } from "@/src/lib-server-only";
 import { Swimmer, Team } from "@/src/model";
 import Link from "next/link";
 
@@ -12,10 +13,10 @@ export async function SwimmerList({ swimmers }: { swimmers: (Swimmer & { team?: 
             <div className="flex-1 hidden md:block">Geburtstag</div>
             <div className="flex-1">Alter</div>
         </div>
-        {swimmers.map((swimmer) => {
+        {Promise.all(swimmers.map(async (swimmer) => {
             const birthday = swimmer.birthday ? new Date(swimmer.birthday) : undefined;
             const teamname = swimmer.team ? swimmer.team.name : undefined;
-            return <Link href={`/swimmers/${swimmer._id?.toString()}`} key={swimmer._id?.toString()}>
+            return <Link prefetch={false} href={`/anmelden/schwimmer/${swimmer._id?.toString()}/${await generateHash(swimmer._id?.toString() || "")}`} key={swimmer._id?.toString()}>
                 <div>
                     <div className="flex flex-row gap-0.5 hover:bg-gray-200 rounded-md p-1">
                         <div className="flex-1">{swimmer.firstName}</div>
@@ -27,6 +28,6 @@ export async function SwimmerList({ swimmers }: { swimmers: (Swimmer & { team?: 
                     </div>
                 </div>
             </Link>
-        })}
+        }))}
     </div>
 }
