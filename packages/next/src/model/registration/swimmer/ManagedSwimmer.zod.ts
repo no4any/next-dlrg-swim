@@ -5,7 +5,7 @@ import { MongoObjectId } from "../../MongoObjectId.zod";
 
 export const ManagedSwimmer = SwimmerData.extend({
     type: z.literal(SwimmerType.enum.MANAGED),
-    email: z.email({ error: "Keine valide E-Mail" }).max(255, { error: "E-Mail ist zu lang. Maximal 255 Zeichen sind zulässig." }).optional(),
+    email: z.email({ error: "Keine valide E-Mail" }).max(255, { error: "E-Mail ist zu lang. Maximal 255 Zeichen sind zulässig." }).nullish(),
     teamId: MongoObjectId
 })
 
