@@ -21,6 +21,8 @@
     "dev": "npm run dev --workspace=@next-dlrg-swim/next",
     "dev:docker": "docker compose -f docker-compose.dev.yml up",
     "gen:keys": "node keygen.js",
-    "prod": "docker compose up -d"
+    "prod": "docker compose up -d",
+    "prod:stop": "docker compose stop",
+    "prod:log": "docker compose logs -f"
   }
 }
