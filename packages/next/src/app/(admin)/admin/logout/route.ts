@@ -1,7 +1,7 @@
 import { logout } from "@/src/lib/login/logout.action";
-import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 
 export async function GET(request: Request) {
-    console.log("Logout")
     await logout();
+    redirect('/login');
 }

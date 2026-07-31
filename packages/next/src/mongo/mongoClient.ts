@@ -41,11 +41,33 @@ export async function getTeamsCollection() {
 
 export async function getSwimmersCollection() {
     const swimmersCollection = await getCollection<Swimmer>('swimmers');
+    try {
+        await swimmersCollection.dropIndexes();
+    } catch(e) {}
+
     await swimmersCollection.createIndex({
         email: 1
     }, {
         unique: true,
         partialFilterExpression: { email: { $type: "string" } }
+    });
+    await swimmersCollection.createIndex({
+        capColor: 1,
+        capNr: 1,
+    }, {
+        unique: true,
+        partialFilterExpression: { 
+            capColor: { $type: "string" },
+            capNr: { $type: "number" }
+        }
+    });
+    await swimmersCollection.createIndex({
+        regNr: 1
+    }, {
+        unique: true,
+        partialFilterExpression: { 
+            regNr: { $type: "number" }
+        }
     });
     return swimmersCollection;
 }

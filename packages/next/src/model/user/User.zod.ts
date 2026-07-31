@@ -3,7 +3,7 @@ import { MongoObjectId } from "../MongoObjectId.zod";
 
 export const User = z.object({
   _id: MongoObjectId.nullish(),
-  email: z.string(),
+  email: z.string().trim().toLowerCase(),
   isAdmin: z.optional(z.boolean())
 });
 
