@@ -8,3 +8,4 @@ export const Swimmer = z.discriminatedUnion("type", [
 ]);
 
 export type Swimmer = z.infer<typeof Swimmer>;
+export type SwimmerInput = z.input<typeof Swimmer>;

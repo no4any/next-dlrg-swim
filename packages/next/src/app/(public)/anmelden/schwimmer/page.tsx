@@ -1,5 +1,6 @@
 import { registerSwimmer } from "@/src/components/forms/swimmer/registerSwimmer.action";
 import { SwimmerForm } from "@/src/components/forms/swimmer/SwimmerForm.component";
+import { connection } from "next/server";
 
 export default async function RegisterSwimmerPage() {
     return <div>

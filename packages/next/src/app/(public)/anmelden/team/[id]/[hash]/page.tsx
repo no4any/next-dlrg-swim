@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getTeam } from "@/src/mongo/team.mongo";
 import { notFound } from "next/navigation";
 import { SwimmersList } from "./SwimmersList.component";

@@ -1,6 +1,6 @@
 "use client"
 
-import { Swimmer } from "@/src/model";
+import { SwimmerInput } from "@/src/model";
 import { useActionState } from "react";
 import { HintBox } from "../../HintBox.component";
 import { Form } from "../../Form";
@@ -18,7 +18,7 @@ export type SwimmerFormState = {
     unknownError?: boolean
 }
 
-function fieldToText(field: keyof Swimmer): string {
+function fieldToText(field: keyof SwimmerInput): string {
     switch (field) {
         case "email": return "Die E-Mail ist nicht korrekt. Bitte prüfen Sie diese";
         case "birthday": return "Das Geburstdatum ist falsch formatiert oder liegt nicht zw. dem 01.01.1900 und dem 01.01.2022";
@@ -26,7 +26,7 @@ function fieldToText(field: keyof Swimmer): string {
     return field;
 }
 
-export function SwimmerForm({ serverAction, swimmer, teamId, teamHash, submitButtonText, noMail }: { serverAction: FormAction<SwimmerFormState>, swimmer?: Partial<Swimmer>, teamId?: string, submitButtonText?: string, teamHash?: string, noMail?: boolean }) {
+export function SwimmerForm({ serverAction, swimmer, teamId, teamHash, submitButtonText, noMail }: { serverAction: FormAction<SwimmerFormState>, swimmer?: Partial<SwimmerInput>, teamId?: string, submitButtonText?: string, teamHash?: string, noMail?: boolean }) {
     const [state, formAction, pending] = useActionState(serverAction, {});
 
     return <div>
@@ -39,9 +39,9 @@ export function SwimmerForm({ serverAction, swimmer, teamId, teamHash, submitBut
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Input title="Vorname" name="firstName" type="text" defaultValue={swimmer?.firstName} disabled={pending} />
                 <Input title="Nachname" name="lastName" type="text" defaultValue={swimmer?.lastName} disabled={pending} />
-                {noMail ? <></> : <Input title="E-Mail" name="email" type="text" defaultValue={swimmer?.email} disabled={pending} />}
-                <Input title="Geburtstag" name="birthday" type="date" defaultValue={swimmer?.birthday} disabled={pending} />
-                <Input title="Wohnort" name="city" type="text" defaultValue={swimmer?.city} disabled={pending} />
+                {noMail ? <></> : <Input title="E-Mail" name="email" type="text" defaultValue={swimmer?.email ?? ""} disabled={pending} />}
+                <Input title="Geburtstag" name="birthday" type="date" defaultValue={swimmer?.birthday ?? ""} disabled={pending} />
+                <Input title="Wohnort" name="city" type="text" defaultValue={swimmer?.city ?? ""} disabled={pending} />
                 <Select title="Geschlecht" name="gender" defaultValue={swimmer?.gender ?? "0"} disabled={pending}>
                     <option value="0">Keine Angabe</option>
                     <option value="W">Weiblich</option>

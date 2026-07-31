@@ -1,6 +1,6 @@
 "use client"
 
-import { Team, TeamType } from "@/src/model";
+import { Team, TeamInput, TeamType } from "@/src/model";
 import { useActionState } from "react";
 import { HintBox } from "../../HintBox.component";
 import { Form } from "../../Form";

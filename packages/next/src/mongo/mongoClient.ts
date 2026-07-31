@@ -6,7 +6,10 @@ declare global {
     var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-const client = new MongoClient(MONGO_CONNECTION_STRING, {});
+const client = new MongoClient(MONGO_CONNECTION_STRING, {
+    minPoolSize: 10,
+    maxPoolSize: 100
+});
 // const mongoClient = client.connect();
 let mongoClient: Promise<MongoClient>;
 
