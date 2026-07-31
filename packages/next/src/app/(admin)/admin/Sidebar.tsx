@@ -1,10 +1,10 @@
 "use client"
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Suspense } from "react";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaCalculator, FaSwimmer } from "react-icons/fa";
-import { GrGroup, GrUser } from "react-icons/gr";
+import { GrGroup, GrUser, GrUserAdd } from "react-icons/gr";
 import { LuLogOut } from "react-icons/lu";
 import { PiPasswordFill } from "react-icons/pi";
 
@@ -23,6 +23,11 @@ export function Sidebar() {
             <SidebarLink href="/admin/log" prefetch={false}>
                 <div>
                     <FaCalculator className="size-8" />
+                </div>
+            </SidebarLink>
+            <SidebarLink href="/admin/users" prefetch={false}>
+                <div>
+                    <GrUserAdd className="size-8"/>
                 </div>
             </SidebarLink>
         </div>

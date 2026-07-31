@@ -8,3 +8,4 @@ export const User = z.object({
 });
 
 export type User = z.infer<typeof User>;
+export type UserInput = z.input<typeof User>;

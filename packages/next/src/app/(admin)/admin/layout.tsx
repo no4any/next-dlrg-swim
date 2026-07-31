@@ -3,13 +3,14 @@ import type { Metadata } from "next";
 import { Sidebar } from "./Sidebar";
 import { Suspense } from "react";
 import { Spinner } from "./Spinner";
+import { isAdmin } from "@/src/lib/login/isAdmin.function";
 
 export const metadata: Metadata = {
   title: "DLRG Admin",
   description: "Adminbereich für die DLRG",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
