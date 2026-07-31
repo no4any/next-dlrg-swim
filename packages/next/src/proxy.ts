@@ -7,10 +7,10 @@ import { findUser } from './mongo/user.mongo';
 
 async function isLoggedIn(headers: Headers, cookieStore: RequestCookies): Promise<Headers | null> {
   const token = cookieStore.get(COOKIE_AUTH_TOKEN_NAME)?.value ?? "";
+  
+  if (!token) return null;
 
   const tokenUser = await jwtValidate(token);
-
-  if (!token) return null;
 
   const user = await findUser(tokenUser?.email || "");
 
@@ -35,10 +35,10 @@ export async function proxy(request: NextRequest) {
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
-  
-
   return NextResponse.next({
-    headers
+    request: {
+      headers
+    }
   });
 }
 
