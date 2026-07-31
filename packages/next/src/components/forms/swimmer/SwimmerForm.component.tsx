@@ -18,14 +18,6 @@ export type SwimmerFormState = {
     unknownError?: boolean
 }
 
-function fieldToText(field: keyof SwimmerInput): string {
-    switch (field) {
-        case "email": return "Die E-Mail ist nicht korrekt. Bitte prüfen Sie diese";
-        case "birthday": return "Das Geburstdatum ist falsch formatiert oder liegt nicht zw. dem 01.01.1900 und dem 01.01.2022";
-    }
-    return field;
-}
-
 export function SwimmerForm({ serverAction, swimmer, teamId, teamHash, submitButtonText, noMail }: { serverAction: FormAction<SwimmerFormState>, swimmer?: Partial<SwimmerInput>, teamId?: string, submitButtonText?: string, teamHash?: string, noMail?: boolean }) {
     const [state, formAction, pending] = useActionState(serverAction, {});
 

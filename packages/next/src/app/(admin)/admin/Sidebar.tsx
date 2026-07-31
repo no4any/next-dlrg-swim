@@ -6,6 +6,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { FaCalculator, FaSwimmer } from "react-icons/fa";
 import { GrGroup, GrUser } from "react-icons/gr";
 import { LuLogOut } from "react-icons/lu";
+import { PiPasswordFill } from "react-icons/pi";
 
 export function Sidebar() {
     return <div className="md:h-full flex md:flex-col flex-row gap-4 bg-dlrg-red p-2">
@@ -29,6 +30,12 @@ export function Sidebar() {
             <SidebarLink href="/admin/user" prefetch={false}>
                 <div>
                     <GrUser className="size-8" />
+                </div>
+            </SidebarLink>
+
+            <SidebarLink href="/admin/user/password" prefetch={false}>
+                <div>
+                    <PiPasswordFill className="size-8" />
                 </div>
             </SidebarLink>
 
