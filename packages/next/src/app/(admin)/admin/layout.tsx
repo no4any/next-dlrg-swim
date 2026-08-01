@@ -1,9 +1,8 @@
 import "../../globals.css";
 import type { Metadata } from "next";
-import { Sidebar } from "./Sidebar";
 import { Suspense } from "react";
 import { Spinner } from "./Spinner";
-import { isAdmin } from "@/src/lib/login/isAdmin.function";
+import { SidebarWrapper } from "./SidebarWrapper.component";
 
 export const metadata: Metadata = {
   title: "DLRG Admin",
@@ -25,7 +24,7 @@ export default async function RootLayout({
           {/* The sidebar wrapper must have h-screen and sticky */}
           <aside className="sticky top-0 md:h-screen shrink-0">
             <Suspense>
-              <Sidebar />
+              <SidebarWrapper/>
             </Suspense>
           </aside>
 

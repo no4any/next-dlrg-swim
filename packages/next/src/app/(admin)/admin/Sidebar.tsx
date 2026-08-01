@@ -8,7 +8,7 @@ import { GrGroup, GrUser, GrUserAdd } from "react-icons/gr";
 import { LuLogOut } from "react-icons/lu";
 import { PiPasswordFill } from "react-icons/pi";
 
-export function Sidebar() {
+export function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
     return <div className="md:h-full flex md:flex-col flex-row gap-4 bg-dlrg-red p-2">
         <div className="flex md:flex-col flex-row gap-4 grow">
             <SidebarLink href="/admin" prefetch={false}>
@@ -25,11 +25,11 @@ export function Sidebar() {
                     <FaCalculator className="size-8" />
                 </div>
             </SidebarLink>
-            <SidebarLink href="/admin/users" prefetch={false}>
+            {isAdmin && <SidebarLink href="/admin/users" prefetch={false}>
                 <div>
-                    <GrUserAdd className="size-8"/>
+                    <GrUserAdd className="size-8" />
                 </div>
-            </SidebarLink>
+            </SidebarLink>}
         </div>
         <div className="flex md:flex-col flex-row gap-4 shrink md:border-t-2 md:border-t-dlrg-yellow md:pt-2">
             <SidebarLink href="/admin/user" prefetch={false}>
@@ -53,7 +53,7 @@ export function Sidebar() {
     </div>
 }
 
-function SidebarLink({ href, children, prefetch }: { href: string, children: React.ReactNode, prefetch?:boolean }) {
+function SidebarLink({ href, children, prefetch }: { href: string, children: React.ReactNode, prefetch?: boolean }) {
     const pathname = usePathname();
     const active = pathname === href ? { "data-active": true } : {}
 
