@@ -3,7 +3,7 @@ import { addTeam, getTeamByEMail, getTeamByName } from "@/src/mongo/team.mongo";
 import { redirect } from "next/navigation";
 import { ZodError } from "zod";
 import { TeamFormState } from "./TeamForm.component";
-import { generateHash } from "@/src/lib-server-only";
+import { generateHash, sendMailWithCredentialsTeam } from "@/src/lib-server-only";
 
 async function parseTeamFromFormData(formData: FormData): Promise<Team> {
     const unparsedTeam = Object.fromEntries(formData.entries());
@@ -26,7 +26,7 @@ export async function registerTeam(_initialState: TeamFormState, formData: FormD
         id = result.insertedId.toString();
     } catch (e) {
         if (e instanceof ZodError) {
-            return { issues: e.issues.filter((issue) => issue.path[0].toString() !== 'nameLower').map((issue) => issue.message)};
+            return { issues: e.issues.filter((issue) => issue.path[0].toString() !== 'nameLower').map((issue) => issue.message) };
         }
         const team = await getTeamByEMail(email || '')
         if (team) {
@@ -37,5 +37,10 @@ export async function registerTeam(_initialState: TeamFormState, formData: FormD
         }
         return { unknownError: true }
     }
-    redirect(`/anmelden/team/${id}/${await generateHash(id)}`);
+    try {
+        await sendMailWithCredentialsTeam(email ?? '', teamName, id);
+    } catch (e) {
+        console.log(e);
+    }
+    redirect(`/anmelden/erfolgreich`);
 }
