@@ -32,6 +32,6 @@ export default async function TeamPage({params}: {params: Promise<{id: string}>}
         </div>
         <hr className="my-4" />
         <h2 className="my-4">Schwimmer für das Team</h2>
-        <SwimmerList swimmers={team.swimmers} />
+        <SwimmerList swimmers={team.swimmers} noTeam />
     </div>
 }
