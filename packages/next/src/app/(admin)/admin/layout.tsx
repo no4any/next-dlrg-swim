@@ -24,7 +24,9 @@ export default async function RootLayout({
         <div className="flex md:flex-row flex-col relative">
           {/* The sidebar wrapper must have h-screen and sticky */}
           <aside className="sticky top-0 md:h-screen shrink-0">
-            <Sidebar />
+            <Suspense>
+              <Sidebar />
+            </Suspense>
           </aside>
 
           <main className="flex-1 min-w-0 px-4 md:px-16 lg:px-32 bg-white grow min-h-screen p-2">

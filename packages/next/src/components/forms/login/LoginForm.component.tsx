@@ -23,7 +23,7 @@ export default function LoginForm() {
                 {state.error && <Hint type="ERROR">Ein unbekannter Fehler ist aufgetreten. Versuchen Sie es später noch einmal.</Hint>}
             </HintBox>
             <div className="flex flex-row gap-4">
-                <Input type="text" name="email" disabled={pending} placeholder="E-Mail" title="E-Mail" />
+                <Input type="email" name="email" disabled={pending} placeholder="E-Mail" title="E-Mail" />
                 <Input type="password" name="password" disabled={pending} placeholder="Password" title="Password" />
             </div>
             <div className="flex flex-row">

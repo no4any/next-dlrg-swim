@@ -3,6 +3,7 @@
 import { ButtonError } from "@/src/components/Button.component"
 import { UserInput } from "@/src/model"
 import { removeUser } from "./removeUser.action"
+import { MdDelete } from "react-icons/md"
 
 export function UsersList({users}: {users: UserInput[]}) {
     return <div className="flex flex-col gap-2">
@@ -18,7 +19,7 @@ export function UsersList({users}: {users: UserInput[]}) {
                 if(confirm(`${user.email} wirklich löschen?`)) {
                     removeUser(user.email);
                 }
-            }}>Löschen</ButtonError></div>
+            }}><MdDelete className="size-6"/></ButtonError></div>
         </div>)}
     </div>
 }

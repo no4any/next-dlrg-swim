@@ -6,7 +6,8 @@ export async function exampleAction(_initState: ExampleFormState, formData: Form
     return {
         errors: [
             "Error 1",
-            "Error 2"
+            "Error 2",
+            formData.get("color")?.toString() ?? "Error 3",
         ],
     }
 }
