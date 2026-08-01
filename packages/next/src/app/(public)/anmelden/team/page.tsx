@@ -1,3 +1,5 @@
+"use cache"
+
 import { registerTeam } from "@/src/components/forms/team/registerTeam.action";
 import { TeamForm } from "@/src/components/forms/team/TeamForm.component";
 

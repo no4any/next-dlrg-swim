@@ -8,7 +8,7 @@ generateKeyPair('rsa', {
     privateKeyEncoding: { type: 'pkcs8', format: 'pem' }
 }, (err, publicKey, privateKey) => {
     if (err) throw err;
-    writeFile('./packages/next/src/lib/jwt/keys.json', JSON.stringify({
+    writeFile('./packages/next/src/lib-server-only/jwt/keys.json', JSON.stringify({
         publicKey,
         privateKey
     }), 'utf8')

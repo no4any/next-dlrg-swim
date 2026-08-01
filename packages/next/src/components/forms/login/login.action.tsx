@@ -2,11 +2,11 @@
 
 import { redirect } from "next/navigation";
 import { LoginFormState } from "./LoginForm.component";
-import { User, UserWithPassword } from "@/src/model";
+import { UserWithPassword } from "@/src/model";
 import { authUser } from "@/src/mongo/user.mongo";
-import { jwtSign } from "@/src/lib";
 import { cookies } from "next/headers";
 import { COOKIE_AUTH_TOKEN_NAME } from "@/src/props";
+import { jwtSign } from "@/src/lib-server-only/jwt";
 
 async function parseUserFromFormData(formData: FormData): Promise<UserWithPassword> {
     const unparsedUser = Object.fromEntries(formData.entries());

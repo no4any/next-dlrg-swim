@@ -2,8 +2,8 @@ import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { COOKIE_AUTH_TOKEN_NAME, DEFAULT_USER_EMAIL, HEADER_USER_NAME } from './props';
-import { jwtValidate } from './lib';
 import { findUser } from './mongo/user.mongo';
+import { jwtValidate } from './lib-server-only/jwt';
 
 async function isLoggedIn(headers: Headers, cookieStore: RequestCookies): Promise<Headers | null> {
   const token = cookieStore.get(COOKIE_AUTH_TOKEN_NAME)?.value ?? "";

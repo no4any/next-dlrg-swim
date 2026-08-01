@@ -1,3 +1,5 @@
+import "server-only"
+
 import { User } from '@/src/model';
 import KEYS from './keys.json';
 import { importPKCS8, SignJWT } from 'jose';

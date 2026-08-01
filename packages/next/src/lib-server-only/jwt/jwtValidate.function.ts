@@ -1,3 +1,5 @@
+import "server-only"
+
 import { importSPKI, jwtVerify } from 'jose';
 import KEYS from './keys.json';
 import { User } from '@/src/model';

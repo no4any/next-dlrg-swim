@@ -1,4 +1,3 @@
-export * from './jwt'
 export * from './login'
 
 export * from './dateToGermanyDate.function'
