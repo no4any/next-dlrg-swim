@@ -18,6 +18,11 @@ services:
       DEFAULT_USER_PASSWORD: ${DEFAULT_USER_PASSWORD}
       SALT: ${SALT}
       MONGO_CONNECTION_STRING: ${MONGO_CONNECTION_STRING}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_FROM: ${SMTP_FROM}
   nginx: 
     build: ./.docker/nginx
     restart: unless-stopped
