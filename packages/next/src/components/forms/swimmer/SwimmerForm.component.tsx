@@ -32,8 +32,8 @@ export function SwimmerForm({ serverAction, swimmer, teamId, teamHash, submitBut
                 <Input title="Vorname" name="firstName" type="text" defaultValue={swimmer?.firstName} disabled={pending} />
                 <Input title="Nachname" name="lastName" type="text" defaultValue={swimmer?.lastName} disabled={pending} />
                 {noMail ? <></> : <Input title="E-Mail" name="email" type="text" defaultValue={swimmer?.email ?? ""} disabled={pending} />}
-                <Input title="Geburtstag" name="birthday" type="date" defaultValue={swimmer?.birthday ?? ""} disabled={pending} />
-                <Input title="Wohnort" name="city" type="text" defaultValue={swimmer?.city ?? ""} disabled={pending} />
+                <Input title="Geburtstag" optional name="birthday" type="date" defaultValue={swimmer?.birthday ?? ""} disabled={pending} />
+                <Input title="Wohnort" optional name="city" type="text" defaultValue={swimmer?.city ?? ""} disabled={pending} />
                 <Select title="Geschlecht" name="gender" defaultValue={swimmer?.gender ?? "0"} disabled={pending}>
                     <option value="0">Keine Angabe</option>
                     <option value="W">Weiblich</option>
