@@ -1,6 +1,7 @@
 import z from "zod";
 import { RegistrationStatus } from "./RegistrationStatus.zod";
 import { MongoObjectId } from "../../MongoObjectId.zod";
+import { Comment } from "../Comment.zod";
 
 export const SwimmerData = z.object({
     _id: MongoObjectId.nullish(),
@@ -17,7 +18,8 @@ export const SwimmerData = z.object({
     city: z.string()
         .trim()
         .min(2, { error: "Der Ort muss mindestens 2 Buchstaben haben" })
-        .max(255, { error: "Der Ort darf nicht mehr als 255 Buchstaben haben" }).nullish(),
+        .max(255, { error: "Der Ort darf nicht mehr als 255 Buchstaben haben" })
+        .nullish(),
     birthday: z.iso.date().nullish(),
     breakfast: z.boolean().nullish(),
     publishName: z.boolean().nullish(),
@@ -25,6 +27,7 @@ export const SwimmerData = z.object({
     capNr: z.number().min(1).max(100).nullish(),
     regNr: z.number().min(1000).max(9999).nullish(),
     newsletter: z.boolean().nullish(),
+    comments: z.array(Comment).nullish()
 })
 
 export type SwimmerData = z.infer<typeof SwimmerData>;

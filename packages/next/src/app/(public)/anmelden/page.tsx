@@ -16,7 +16,7 @@ export default function RegisterPage() {
                 </h1>
                 <div>
                     <p>Hier melden Sie sich unverbindlich zur 24 Stunden Schwimmer 2025 an. Nach erfolgreicher Anmeldung erhalten Sie eine E-Mail mit Ihren Zugangsdaten. <span className="text-dlrg-red font-bold">Behandeln Sie den enthaltenen Link vertraulich.</span></p>
-                    <p className="mt-4">Vor Ort beträgt die Startgebühr 7 &euro;. Außerdem beträgt der Pfand für eine Badekappe 5 &euro;. Es erleichtert uns die Rückgabe, wenn Sie das Pfand passend als 5 &euro; mitbringen können. <b>An der Veranstaltung sind ausschließlich Barzahlungen möglich.</b></p>
+                    <p className="mt-4">Vor Ort beträgt die Startgebühr 7 &euro;. Außerdem beträgt das Pfand für eine Badekappe 5 &euro;. Es erleichtert uns die Rückgabe, wenn Sie das Pfand passend als 5 &euro; mitbringen können. <b>An der Veranstaltung sind ausschließlich Barzahlungen möglich.</b></p>
                     <p className="mt-4">Sie können nun entscheiden, ob Sie ein Team erstellen möchten oder sich als Einzelschwimmer anmelden möchten. Falls Sie in einem Team mitschwimmen wollen, erstellen Sie ein Team oder fragen Sie einen Teamleiter nach einem Anmeldelink.</p>
                 </div>
             </header>

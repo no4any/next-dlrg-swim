@@ -1,5 +1,7 @@
 import { ButtonSuccess } from "@/src/components/Button.component";
+import { CommentList } from "@/src/components/CommentList.component";
 import { Detail } from "@/src/components/Detail.component";
+import { CommentsForm } from "@/src/components/forms/comments/CommentsForm.component";
 import { dateToGermanDate, getAge, getGenderString } from "@/src/lib";
 import { generateHash } from "@/src/lib-server-only";
 import { getSwimmer } from "@/src/mongo/swimmer.mongo";
@@ -38,6 +40,13 @@ export default async function SwimmerPage({params}: {params: Promise<{id: string
             <Detail title="Newsletter">{swimmer.newsletter ? "Ja" : "Nein"}</Detail>
             <Detail title="Frühstück ">{swimmer.breakfast ? "Ja" : "Nein"}</Detail>
             <Detail title="Stadt">{swimmer.city ?? <NotDefined />}</Detail>
+        </div>
+        <div>
+            <h2 className="my-4">Kommentare</h2>
+            <CommentsForm type="SWIMMER" id={swimmer._id.toString()}/>
+        </div>
+        <div>
+            <CommentList comments={swimmer.comments ?? undefined} />
         </div>
     </div>
 }

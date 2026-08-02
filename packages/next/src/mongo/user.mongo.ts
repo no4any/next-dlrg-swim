@@ -8,6 +8,10 @@ import { flat } from "../lib";
 
 const collection = getUSersCollection();
 
+export async function backupUser() {
+    return await (await collection)?.find({}).toArray();
+}
+
 async function getUsersRaw() {
     const users = await (await collection).find({}).toArray();
     return z.array(User).parse(await flat(users));

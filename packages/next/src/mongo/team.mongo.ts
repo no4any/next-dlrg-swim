@@ -5,6 +5,10 @@ import { getTeamsCollection } from "./mongoClient";
 
 const collection = getTeamsCollection();
 
+export async function backupTeam() {
+    return await (await collection)?.find({}).toArray();
+}
+
 async function getTeamRaw(id: string | ObjectId) {
     return (await collection)?.aggregate<Team & { swimmers: Swimmer[] }>([
         { $match: { _id: id instanceof ObjectId ? id : new ObjectId(id) } },
@@ -68,10 +72,25 @@ async function getTeamByNameRaw(name: string) {
 }
 export const getTeamByName = cache(getTeamByNameRaw);
 
-async function addTeamRaw(team: Team) {
+export async function addTeam(team: Team) {
     return (await collection)?.insertOne(team);
 }
-export const addTeam = cache(addTeamRaw);
+
+export async function addCommentToTeam(id: string | ObjectId, email: string, message: string) {
+    const result = await (await collection).updateOne({
+        _id: id instanceof ObjectId ? id : new ObjectId(id)
+    }, {
+        $push: {
+            comments: {
+                _id: new ObjectId(),
+                message: message,
+                time: Date.now(),
+                author: email
+            }
+        }
+    })
+    return result.modifiedCount > 0;
+}
 
 async function updateTeamRaw(id: ObjectId, team: Partial<Team>) {
     const { _id, ...restOfTeam } = Team.parse(team);
