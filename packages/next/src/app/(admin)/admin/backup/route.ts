@@ -2,7 +2,6 @@ import { getLogin } from "@/src/lib";
 import { backupSwimmer } from "@/src/mongo/swimmer.mongo";
 import { backupTeam } from "@/src/mongo/team.mongo";
 import { backupUser } from "@/src/mongo/user.mongo";
-import { notFound } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function GET() {
