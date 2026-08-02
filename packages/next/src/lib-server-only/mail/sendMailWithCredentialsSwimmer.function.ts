@@ -7,8 +7,8 @@ export async function sendMailWithCredentialsSwimmer(email: string, name: string
         email,
         'Anmeldung als Schwimmer bei 24 Stunden Schwimmen',
         `<h1>Deine Anmeldung zum Gießener 24-Stunden-Schwimmen (2026)</h1>
-         <p>Mit dieser Mail erhältst Du den Link zu deinen Anmeldedaten und live Fortschritten. <b>Behandel diesen Link vertraulich!</b> Sollten Änderungen nötig sein, kannst du diese beim Check-In am Veranstaltungstag vornehmen lassen.</p>
+         <p>Mit dieser Mail erhältst Du den Link zu deinen Anmeldedaten und Fortschritten. <b>Behandle diesen Link vertraulich!</b> Sollten Änderungen nötig sein, kannst Du diese beim Check-In am Veranstaltungstag vornehmen lassen.</p>
          <p>Teilnehmer: ${name}</p>
-         <p><a href="https://${DOMAIN}/anmelden/schwimmer/${id}/${await generateHash(id)}">Zu Deinen Anmeldedaten</a></p>
+         <p><a href="https://${DOMAIN}/anmelden/schwimmer/${id}/${await generateHash(id)}">Zu deinen Anmeldedaten</a></p>
         `)
 }
