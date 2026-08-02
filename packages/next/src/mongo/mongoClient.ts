@@ -10,7 +10,7 @@ const client = new MongoClient(MONGO_CONNECTION_STRING, {
     minPoolSize: 10,
     maxPoolSize: 100
 });
-// const mongoClient = client.connect();
+
 let mongoClient: Promise<MongoClient>;
 
 if (process.env.NODE_ENV === 'development') {
@@ -20,7 +20,6 @@ if (process.env.NODE_ENV === 'development') {
     }
     mongoClient = global._mongoClientPromise
 } else {
-    console.log("Created MongoClient for PROD");
     mongoClient = client.connect();
 }
 

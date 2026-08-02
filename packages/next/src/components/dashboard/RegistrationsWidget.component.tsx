@@ -1,11 +1,7 @@
-import { getAllSwimmers } from "@/src/mongo/swimmer.mongo";
+import { Swimmer } from "@/src/model";
 import { Widget } from "./Widget.component";
-import { cacheLife } from "next/cache";
 
-export async function RegistrationsWidget() {
-    "use cache"
-    cacheLife("minutes");
-    const swimmers = await getAllSwimmers();
+export async function RegistrationsWidget({swimmers}: {swimmers: Swimmer[]}) {
     const allCount = swimmers.length;
     const registeredCount = swimmers.filter(s => s.status !== "ANNOUNCED").length;
     return <Widget title="Anmeldungen">
