@@ -23,7 +23,6 @@ export async function createComment(_initialState: CommentsFormProps, formData: 
     let path = '/admin';
     try {
         const data = await extractData(formData);
-        console.log("---", data);
         if(data.type === 'SWIMMER') {
             await addCommentToSwimmer(data.id, username, data.message);
         } else {
