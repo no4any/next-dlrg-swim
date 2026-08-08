@@ -2,6 +2,7 @@ import z from "zod";
 import { RegistrationStatus } from "./RegistrationStatus.zod";
 import { MongoObjectId } from "../../MongoObjectId.zod";
 import { Comment } from "../Comment.zod";
+import { CapColor } from "./CapColor.zod";
 
 export const SwimmerData = z.object({
     _id: MongoObjectId.nullish(),
@@ -23,7 +24,7 @@ export const SwimmerData = z.object({
     birthday: z.iso.date().nullish(),
     breakfast: z.boolean().nullish(),
     publishName: z.boolean().nullish(),
-    capColor: z.string().nullish(),
+    capColor: CapColor.nullish(),
     capNr: z.number().min(1).max(100).nullish(),
     regNr: z.number().min(1000).max(9999).nullish(),
     newsletter: z.boolean().nullish(),

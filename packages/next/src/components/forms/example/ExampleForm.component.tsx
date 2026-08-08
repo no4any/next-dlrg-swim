@@ -18,7 +18,7 @@ export function ExampleForm() {
             {state.errors?.map((error, index) => <p key={index}>{error}</p>)}
         </div>
         <Form action={formAction}>
-            <ColorSelect name="color" title="Kappenfarbe"/>
+            <ColorSelect name="color" title="Farbe der Badekappe"/>
             <SubmitButton>Senden</SubmitButton>
         </Form>
     </div>

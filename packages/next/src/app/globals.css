@@ -26,4 +26,21 @@ h3 {
   --color-warning: #FF6600;
   --color-success: #228B22;
   --color-info: #303030;
+
+  --color-bronze: #A87900;
+  --color-silver: #E5E4E2;
+  --color-gold: #D4AF37;
+
+  --color-cap-red: #FF0000;
+  --color-cap-red-border: #B40000;
+  --color-cap-orange: #FFA500;
+  --color-cap-orange-border: #C86400;
+  --color-cap-green: #008000;
+  --color-cap-green-border: #005000;
+  --color-cap-yellow: #FFFF00;
+  --color-cap-yellow-border: #C8B400;
+  --color-cap-blue: #0000FF;
+  --color-cap-blue-border: #0000A0;
+  --color-cap-white: #FFFFFF;
+  --color-cap-white-border: #C8C8C8
 }
