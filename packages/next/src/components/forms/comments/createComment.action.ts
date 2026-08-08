@@ -35,6 +35,6 @@ export async function createComment(_initialState: CommentsFormProps, formData: 
         }
         return {unkownError: true}
     }
-    revalidatePath(path);
+    //revalidatePath(path);
     redirect(path);
 }
