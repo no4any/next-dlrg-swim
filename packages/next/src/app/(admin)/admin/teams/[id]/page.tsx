@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { SwimmerList } from "../../swimmers/SwimmerList.component";
 import { CommentsForm } from "@/src/components/forms/comments/CommentsForm.component";
 import { CommentList } from "@/src/components/CommentList.component";
+import { Suspense } from "react";
 
 async function NotDefined() {
     return <span className="italic">Nicht angegeben</span>
@@ -39,7 +40,9 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
         <hr className="my-4" />
         <div>
             <h2 className="my-4">Kommentare</h2>
-            <CommentsForm type="TEAM" id={team._id.toString()} />
+            <Suspense fallback={<div>Laden ...</div>}>
+                <CommentsForm type="TEAM" id={team._id.toString()} />
+            </Suspense>
         </div>
         <div>
             <CommentList comments={team.comments ?? undefined} />

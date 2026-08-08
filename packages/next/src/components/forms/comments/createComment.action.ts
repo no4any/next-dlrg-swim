@@ -2,7 +2,6 @@
 
 import { redirect } from "next/navigation";
 import { CommentsFormProps } from "./CommentsForm.component";
-import { Comment } from "@/src/model";
 import z, { ZodError } from "zod";
 import { getLogin } from "@/src/lib";
 import { revalidatePath } from "next/cache";
@@ -36,6 +35,5 @@ export async function createComment(_initialState: CommentsFormProps, formData: 
         return {unkownError: true}
     }
     revalidatePath(path);
-    return {};
-    //redirect(path);
+    redirect(path);
 }

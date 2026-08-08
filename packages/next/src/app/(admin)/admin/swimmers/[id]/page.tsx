@@ -6,6 +6,7 @@ import { generateHash } from "@/src/lib-server-only";
 import { getSwimmer } from "@/src/mongo/swimmer.mongo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 export default async function SwimmerPage({params}: {params: Promise<{id: string}>}) {
     const {id} = await params;
@@ -29,7 +30,9 @@ export default async function SwimmerPage({params}: {params: Promise<{id: string
         <SwimmerDetails swimmer={swimmer} />
         <div>
             <h2 className="my-4">Kommentare</h2>
-            <CommentsForm type="SWIMMER" id={swimmer._id.toString()}/>
+            <Suspense fallback={<div>Laden ...</div>}>
+                <CommentsForm type="SWIMMER" id={swimmer._id.toString()}/>
+            </Suspense>
         </div>
         <div>
             <CommentList comments={swimmer.comments ?? undefined} />
