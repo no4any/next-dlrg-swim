@@ -3,7 +3,7 @@
 import z from "zod";
 import { RegsiterSwimmerFormData } from "./SetSwimmerRegistrationForm.component";
 import { CapColor, MongoObjectId } from "@/src/model";
-import { updateRegistrationForSwimmer as updateRegistration } from "@/src/mongo/swimmer.mongo"
+import { registerSwimmer as register } from "@/src/mongo/swimmer.mongo"
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getLogin } from "@/src/lib";
@@ -35,7 +35,7 @@ export async function registerSwimmer(_initialData: RegsiterSwimmerFormData, for
 
     try {
         data = await getFormData(formData);
-        ok = await updateRegistration(data.id, data.color, data.capNr, data.regNr);
+        ok = await register(data.id, data.color, data.capNr, data.regNr);
     } catch (e) {
         return await errorTreat(e, data?.color as CapColor, data?.capNr ?? 0, data?.regNr ?? 0)
     }

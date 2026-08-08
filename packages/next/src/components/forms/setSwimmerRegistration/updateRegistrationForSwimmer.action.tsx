@@ -3,13 +3,11 @@
 import z from "zod";
 import { RegsiterSwimmerFormData } from "./SetSwimmerRegistrationForm.component";
 import { CapColor, MongoObjectId } from "@/src/model";
-import { registerSwimmer as regSwimmer } from "@/src/mongo/swimmer.mongo"
+import { updateRegistrationForSwimmer as update } from "@/src/mongo/swimmer.mongo"
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getLogin } from "@/src/lib";
 import { errorTreat } from "./errorTreat.function";
-
-
 
 async function getFormData(formData: FormData) {
     return {
@@ -26,7 +24,7 @@ async function getFormData(formData: FormData) {
     }
 }
 
-export async function registerSwimmer(_initialData: RegsiterSwimmerFormData, formData: FormData): Promise<RegsiterSwimmerFormData> {
+export async function updateRegistrationForSwimmer(_initialData: RegsiterSwimmerFormData, formData: FormData): Promise<RegsiterSwimmerFormData> {
     const username = await getLogin();
     if (!username) return { errors: ["Sie müssen sich zuerst anmelden!"] }
 
@@ -35,7 +33,7 @@ export async function registerSwimmer(_initialData: RegsiterSwimmerFormData, for
     
     try {
         data = await getFormData(formData);
-        ok = await regSwimmer(data.id, data.color, data.capNr, data.regNr);
+        ok = await update(data.id, data.color, data.capNr, data.regNr);
     } catch (e) {
         return await errorTreat(e, data?.color as CapColor, data?.capNr ?? 0, data?.regNr ?? 0)
     }
