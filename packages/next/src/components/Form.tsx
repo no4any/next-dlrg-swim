@@ -11,7 +11,7 @@ export function Form({ children, action, className }: { children: React.ReactNod
         });
     };
 
-    return <form onSubmit={handleSubmit} className={className}>
+    return <form onSubmit={handleSubmit} className={className} method="post">
         {children}
     </form>
 }

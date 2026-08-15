@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { dateToGermanDate, getAge, getGenderString } from "../lib";
-import { Swimmer } from "../model";
-import { getTeam } from "../mongo/team.mongo";
+import { Swimmer, Team } from "../model";
 import { Detail } from "./Detail.component";
 
-async function NotDefined() {
+function NotDefined() {
     return <span className="italic">Nicht angegeben</span>
 }
 
-export async function SwimmerDetails({ swimmer }: { swimmer: Swimmer }) {
-    const team = swimmer?.teamId ? await getTeam(swimmer?.teamId) : undefined;
+export function SwimmerDetails({ swimmer, team }: { swimmer: Swimmer, team: Team | undefined }) {
     const birthday = swimmer?.birthday ? new Date(swimmer.birthday) : undefined;
 
     return <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">

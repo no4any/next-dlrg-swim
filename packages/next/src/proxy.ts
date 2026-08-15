@@ -1,43 +1,33 @@
-import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { COOKIE_AUTH_TOKEN_NAME, DEFAULT_USER_EMAIL, HEADER_USER_NAME } from './props';
-import { findUser } from './mongo/user.mongo';
+import { COOKIE_AUTH_TOKEN_NAME, HEADER_USER_NAME } from './props';
 import { jwtValidate } from './lib-server-only/jwt';
 
-async function isLoggedIn(headers: Headers, cookieStore: RequestCookies): Promise<Headers | null> {
+async function isLoggedIn(headers: Headers, cookieStore: NextRequest['cookies']): Promise<Headers | null> {
   const token = cookieStore.get(COOKIE_AUTH_TOKEN_NAME)?.value ?? "";
-  
   if (!token) return null;
 
   const tokenUser = await jwtValidate(token);
-
-  const user = await findUser(tokenUser?.email || "");
-
-  if(!user) {
-    if(tokenUser?.email === DEFAULT_USER_EMAIL) {
-      headers.set(HEADER_USER_NAME, DEFAULT_USER_EMAIL);
-      return headers;
-    }
-    return null;
-  };
-
-  headers.set(HEADER_USER_NAME, user.email);
-
-  return headers;
+  if(!tokenUser) return null;
+  
+  const newHeader = new Headers(headers);
+  newHeader.set(HEADER_USER_NAME, tokenUser.email);
+  return newHeader;
 }
 
 export async function proxy(request: NextRequest) {
-  request.headers.delete(HEADER_USER_NAME);
-  const headers = await isLoggedIn(request.headers, request.cookies);
-  if (!headers) {
+  if (request.headers.has('next-action')) {
+    return NextResponse.next();
+  }
+  const validatedHeaders = await isLoggedIn(request.headers, request.cookies);
+  if (!validatedHeaders) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
   return NextResponse.next({
     request: {
-      headers
+      headers: validatedHeaders
     }
   });
 }

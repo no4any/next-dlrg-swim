@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { CommentsFormProps } from "./CommentsForm.component";
 import z, { ZodError } from "zod";
-import { getLogin } from "@/src/lib";
+import { auth } from "@/src/lib";
 import { revalidatePath } from "next/cache";
 import { addCommentToTeam } from "@/src/mongo/team.mongo";
 import { addCommentToSwimmer } from "@/src/mongo/swimmer.mongo";
@@ -17,8 +17,7 @@ async function extractData(formData: FormData) {
 }
 
 export async function createComment(_initialState: CommentsFormProps, formData: FormData): Promise<CommentsFormProps> {
-    const username = await getLogin();
-    if (!username) return { unkownError: true };
+    const username = await auth();
     let path = '/admin';
     try {
         const data = await extractData(formData);
@@ -34,6 +33,6 @@ export async function createComment(_initialState: CommentsFormProps, formData: 
         }
         return {unkownError: true}
     }
-    revalidatePath(path);
+    revalidatePath(path, 'layout');
     redirect(path);
 }

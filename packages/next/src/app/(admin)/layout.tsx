@@ -1,8 +1,8 @@
-import "../../globals.css";
+import "../globals.css";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Spinner } from "./Spinner";
-import { SidebarWrapper } from "./SidebarWrapper.component";
+import { SidebarWrapper } from "./admin/SidebarWrapper.component";
+import { Spinner } from "./admin/Spinner";
 
 export const metadata: Metadata = {
   title: "DLRG Admin",

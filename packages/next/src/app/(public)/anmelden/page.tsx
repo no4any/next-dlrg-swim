@@ -1,7 +1,6 @@
-import { Button, ButtonError, ButtonInfo, ButtonSuccess } from "@/src/components/Button.component";
 import Link from "next/link";
 import React from "react";
-import { FaSwimmer, FaUber, FaUbuntu } from "react-icons/fa";
+import { FaSwimmer } from "react-icons/fa";
 import { GrGroup } from "react-icons/gr";
 
 export default function RegisterPage() {

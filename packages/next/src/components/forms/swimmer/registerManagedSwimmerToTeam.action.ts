@@ -17,7 +17,6 @@ export async function registerManagedSwimmerToTeam(_initialState: SwimmerFormSta
     try {
         const swimmer = await parseSwimmerFromFormData(formData, "MANAGED", "ANNOUNCED");
         email = swimmer.email;
-        console.log(!await validateHash(teamIdString, teamHash));
         if (!await validateHash(teamIdString, teamHash)) return { unknownError: true }
         const teamId = new ObjectId(teamIdString);
         const team = getTeam(teamId);

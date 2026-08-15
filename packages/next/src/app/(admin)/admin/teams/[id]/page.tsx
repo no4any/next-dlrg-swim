@@ -40,9 +40,7 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
         <hr className="my-4" />
         <div>
             <h2 className="my-4">Kommentare</h2>
-            <Suspense fallback={<div>Laden ...</div>}>
-                <CommentsForm type="TEAM" id={team._id.toString()} />
-            </Suspense>
+            <CommentsForm type="TEAM" id={team._id.toString()} />
         </div>
         <div>
             <CommentList comments={team.comments ?? undefined} />

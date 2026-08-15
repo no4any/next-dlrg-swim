@@ -6,10 +6,8 @@ import { CapColor, MongoObjectId } from "@/src/model";
 import { registerSwimmer as register } from "@/src/mongo/swimmer.mongo"
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getLogin } from "@/src/lib";
+import { auth } from "@/src/lib";
 import { errorTreat } from "./errorTreat.function";
-
-
 
 async function getFormData(formData: FormData) {
     return {
@@ -27,8 +25,7 @@ async function getFormData(formData: FormData) {
 }
 
 export async function registerSwimmer(_initialData: RegsiterSwimmerFormData, formData: FormData): Promise<RegsiterSwimmerFormData> {
-    const username = await getLogin();
-    if (!username) return { errors: ["Sie müssen sich zuerst anmelden!"] }
+    const username = await auth();
 
     let ok = true;
     let data;
@@ -37,12 +34,12 @@ export async function registerSwimmer(_initialData: RegsiterSwimmerFormData, for
         data = await getFormData(formData);
         ok = await register(data.id, data.color, data.capNr, data.regNr);
     } catch (e) {
-        return await errorTreat(e, data?.color as CapColor, data?.capNr ?? 0, data?.regNr ?? 0)
+        return await errorTreat(e, data?.color as CapColor, data?.capNr ?? 0, data?.regNr ?? 0, data?.id)
     }
     if (!ok) {
         return { errors: ["Schwimmer konnte nicht angemeldet werden!"] }
     }
-    const path = `/admin/swimmers/${data.id.toString()}`;
-    revalidatePath(path);
+    const path = `/admin/swimmers/${data.id}`;
+    revalidatePath(path, 'layout')
     redirect(path);
 }

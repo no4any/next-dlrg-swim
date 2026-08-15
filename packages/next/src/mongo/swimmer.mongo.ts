@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { CapColor, Swimmer } from "../model/registration/swimmer";
+import { CapColor, RegistrationStatus, Swimmer } from "../model/registration/swimmer";
 import { ObjectId } from "mongodb";
 import { getSwimmersCollection } from "./mongoClient";
 
@@ -67,7 +67,7 @@ export async function deleteSwimmer(id: ObjectId | string) {
     return (await collection)?.deleteOne({ _id: typeof id === 'string' ? new ObjectId(id) : id, status: "ANNOUNCED" });
 }
 
-export async function addCommentToSwimmer(id: string | ObjectId, email: string, message: string) {
+export async function addCommentToSwimmer(id: string | ObjectId, email: string, message: string): Promise<boolean> {
     const result = await (await collection).updateOne({
         _id: id instanceof ObjectId ? id : new ObjectId(id)
     }, {
@@ -110,5 +110,16 @@ export async function updateRegistrationForSwimmer(id: string | ObjectId, capCol
             status: "REGISTERED"
         }
     })
+    return result.modifiedCount > 0;
+}
+
+export async function setSwimmerStatus(id: string | ObjectId, status: RegistrationStatus): Promise<boolean> {
+    const result = await (await collection).updateOne({
+        _id: id instanceof ObjectId ? id : new ObjectId(id)
+    }, {
+        $set: {
+            status
+        }
+    });
     return result.modifiedCount > 0;
 }

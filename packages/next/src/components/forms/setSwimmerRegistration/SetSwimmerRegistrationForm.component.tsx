@@ -1,9 +1,8 @@
 "use client"
 
 import { Form } from "@/src/components/Form";
-import { RegistrationStatus, Swimmer } from "@/src/model";
+import { Swimmer } from "@/src/model";
 import { useActionState } from "react";
-import { registerSwimmer } from "./registerSwimmer.action";
 import { ColorSelect } from "@/src/components/ColorSelect.component";
 import { Input } from "@/src/components/Input.component";
 import { ResetButton, SubmitButton } from "@/src/components/Button.component";
