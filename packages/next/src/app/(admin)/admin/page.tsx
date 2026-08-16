@@ -5,6 +5,8 @@ import { RegistrationsWidget } from "@/src/components/dashboard/RegistrationsWid
 import { getAllSwimmers } from "@/src/mongo/swimmer.mongo";
 import { connection } from "next/server";
 
+export const instant = false;
+
 export default async function Home() {
   await connection();
   const swimmers = await getAllSwimmers()

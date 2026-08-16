@@ -9,13 +9,17 @@ import { notFound } from "next/navigation";
 import { SwimmerList } from "../../swimmers/SwimmerList.component";
 import { CommentsForm } from "@/src/components/forms/comments/CommentsForm.component";
 import { CommentList } from "@/src/components/CommentList.component";
-import { Suspense } from "react";
+import { connection } from "next/server";
+
+export const instant = false;
 
 async function NotDefined() {
     return <span className="italic">Nicht angegeben</span>
 }
 
 export default async function TeamPage({ params }: { params: Promise<{ id: string }> }) {
+    await connection();
+
     const { id } = await params;
 
     const team = await getTeam(id);

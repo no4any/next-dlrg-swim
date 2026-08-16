@@ -1,5 +1,5 @@
 import { Tags } from "@/src/components/Tags.component";
-import { borderColorForCapColor, colorForCapColor, dateToGermanDate, getAge, getGenderString } from "@/src/lib";
+import { borderColorForCapColor, colorForCapColor, dateToGermanDate, flat, getAge, getGenderString } from "@/src/lib";
 import { Swimmer, Team } from "@/src/model";
 import Link from "next/link";
 
@@ -20,7 +20,7 @@ export async function SwimmerList({ swimmers, noTeam }: { noTeam?: boolean, swim
                 <div>
                     <div className="flex flex-row gap-0.5 hover:bg-gray-200 rounded-md p-1">
                         <div className="flex-1 flex-row flex gap-1 text-2xl">
-                            <Tags swimmer={swimmer} />
+                            <Tags swimmer={await flat(swimmer)} />
                         </div>
                         <div className="flex-3">{swimmer.firstName}</div>
                         <div className="flex-3">{swimmer.lastName}</div>
