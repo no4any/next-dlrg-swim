@@ -1,7 +1,8 @@
-import { generateHash } from "@/src/lib-server-only";
 import { getAllTeams } from "@/src/mongo/team.mongo"
 import Link from "next/link";
 import { connection } from "next/server";
+
+export const instant = false;
 
 export default async function TeamsPage() {
     await connection();

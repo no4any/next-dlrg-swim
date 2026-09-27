@@ -1,6 +1,8 @@
 import { Document, MongoClient } from "mongodb";
 import { MONGO_CONNECTION_STRING } from "../props";
 import { Swimmer, Team, UserWithPassword } from "../model";
+import { Counter } from "../model/Counter.zod";
+import { LapsCard } from "../model/LapsCard.zod";
 
 declare global {
     var _mongoClientPromise: Promise<MongoClient> | undefined;
@@ -42,7 +44,7 @@ export async function getSwimmersCollection() {
     const swimmersCollection = await getCollection<Swimmer>('swimmers');
     try {
         await swimmersCollection.dropIndexes();
-    } catch(e) {}
+    } catch (e) { }
 
     await swimmersCollection.createIndex({
         email: 1
@@ -55,7 +57,7 @@ export async function getSwimmersCollection() {
         capNr: 1,
     }, {
         unique: true,
-        partialFilterExpression: { 
+        partialFilterExpression: {
             capColor: { $type: "string" },
             capNr: { $type: "number" }
         }
@@ -64,7 +66,7 @@ export async function getSwimmersCollection() {
         regNr: 1
     }, {
         unique: true,
-        partialFilterExpression: { 
+        partialFilterExpression: {
             regNr: { $type: "number" }
         }
     });
@@ -75,4 +77,16 @@ export async function getUSersCollection() {
     const usersCollection = await getCollection<UserWithPassword>('users');
     await usersCollection.createIndex({ email: 1 }, { unique: true });
     return usersCollection;
+}
+
+export async function getCountersCollection() {
+    const countersCollection = await getCollection<Counter>('counters');
+    await countersCollection.createIndex({ _id: 1, count: 1 }, { unique: true });
+    return countersCollection;
+}
+
+export async function getLapsCardsCollection() {
+    const countersCollection = await getCollection<LapsCard>('lapsCards');
+    await countersCollection.createIndex({ id: 1 }, { unique: true });
+    return countersCollection;
 }

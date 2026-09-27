@@ -2,7 +2,7 @@ import FindSwimmerForLogForm from "@/src/components/forms/log/FindSwimmerForLogF
 
 export default async function LogPage() {
     return <div>
-        <h1>Logging</h1>
+        <h1>Karte erfassen</h1>
         <FindSwimmerForLogForm />
     </div>
 }
