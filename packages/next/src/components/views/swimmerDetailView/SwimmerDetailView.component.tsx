@@ -7,8 +7,9 @@ import { ButtonSuccess, ButtonWarn } from "../../Button.component";
 import { SwimmerDetails } from "../../SwimmerDetails";
 import { finishToggleAction } from "./finishToggleAction.action";
 import Link from "next/link";
+import { LapsCard } from "@/src/model/LapsCard.zod";
 
-export function SwimmerDetailView({ swimmer, team }: { swimmer: Swimmer, team?: Team }) {
+export function SwimmerDetailView({ swimmer, team, lapsCards }: { swimmer: Swimmer, team?: Team, lapsCards?: LapsCard[] | null }) {
     const [currentSwimmer, setCurrentSwimmer] = useState(swimmer);
     const [disabled, startTransition] = useTransition();
 
@@ -32,6 +33,6 @@ export function SwimmerDetailView({ swimmer, team }: { swimmer: Swimmer, team?: 
             {swimmer.status === "REGISTERED" ? <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString()}/updateRegistration`} className="pr-2"><ButtonSuccess>Registrierung ändern</ButtonSuccess></Link> : <></>}
             {swimmer.status !== "ANNOUNCED" ?<ButtonWarn disabled={disabled} onClick={toggleFinish}>{swimmer.status === "REGISTERED" ? "Schwimmer beendet" : "Schwimmer reaktivieren"}</ButtonWarn> : <></>}
         </div>
-        <SwimmerDetails swimmer={swimmer} team={team} />
+        <SwimmerDetails lapsCards={lapsCards} swimmer={swimmer} team={team} />
     </div>
 }

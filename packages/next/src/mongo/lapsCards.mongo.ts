@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { counterNext } from "./counter.mongo";
 import { getLapsCardsCollection } from "./mongoClient";
 import { getSwimmer } from "./swimmer.mongo";
@@ -22,4 +23,10 @@ export async function addLapsCard(swimmerId: string, laps: number, isNightCup: b
     })
 
     return { id }
+}
+
+export async function getLapsCards(swimmerId: string | ObjectId) {
+    const col = await collection;
+    const result = await col.find({ swimmerId: typeof swimmerId === "string" ? new ObjectId(swimmerId) : swimmerId }).toArray();
+    return result;
 }
