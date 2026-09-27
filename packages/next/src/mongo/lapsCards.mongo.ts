@@ -38,9 +38,9 @@ export async function getAllLapsCards() {
     return result;
 }
 
-export async function updateLapsCard(id: string | ObjectId, laps: number) {
+export async function updateLapsCard(id: string | ObjectId, laps: number, isNightCup?: boolean) {
     const col = await collection;
-    const result = await col.updateOne({ _id: typeof id === "string" ? new ObjectId(id) : id }, { $set: { laps } });
+    const result = await col.updateOne({ _id: typeof id === "string" ? new ObjectId(id) : id }, { $set: { laps, isNightCup: !!isNightCup } });
     return result;
 }
 

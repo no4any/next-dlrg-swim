@@ -11,8 +11,9 @@ export async function changeLogAction(_initialData: ChangeLogFormStateProps, for
 
     const laps = z.number().parse(parseInt(formData.get('laps')?.toString() || '0'));
     const id = z.string().parse(formData.get('id')?.toString() || '0');
+    const isNightCup = formData.get('isNightCup')?.toString() === "on";
 
-    await updateLapsCard(id, laps);
+    await updateLapsCard(id, laps, isNightCup);
 
     redirect('/admin/loggings')
 }

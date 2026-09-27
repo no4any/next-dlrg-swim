@@ -1,5 +1,6 @@
 import { ChangeLogForm } from "@/src/components/forms/log/changeLogForm/ChangeLogForm.component";
 import { SwimmerDetails } from "@/src/components/SwimmerDetails";
+import { flat } from "@/src/lib";
 import { getLapsCardByCustomId } from "@/src/mongo/lapsCards.mongo";
 import { getSwimmer } from "@/src/mongo/swimmer.mongo";
 import { getTeam } from "@/src/mongo/team.mongo";
@@ -24,8 +25,8 @@ export default async function LogChangePage({ params }: { params: Promise<{ id: 
 
     return <div>
         <h1>Eintrag {id} ändern</h1>
-        <ChangeLogForm key={`id-${Date.now()}`} log={card} />
+        <ChangeLogForm key={`id-${Date.now()}`} log={await flat(card)} />
         <h2>Schwimmerdaten</h2>
-        <SwimmerDetails swimmer={swimmer} team={team || undefined} />
+        <SwimmerDetails swimmer={await flat(swimmer)} team={await flat(team) || undefined} />
     </div>
 }
