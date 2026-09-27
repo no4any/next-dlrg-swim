@@ -26,6 +26,6 @@ export default async function LogSwimmerPage({ params }: { params: Promise<{ id:
             <AddLapCardForm key={`key-${Date.now()}`} swimmerId={swimmer._id.toString()}/>
         </div>
 
-        <SwimmerDetails lapsCards={null} swimmer={swimmer} team={team} />
+        <SwimmerDetails swimmer={swimmer} team={team} />
     </div>
 }
