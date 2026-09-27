@@ -1,5 +1,6 @@
 "use server"
 
+import { auth } from "@/src/lib"
 import { addLapsCard } from "@/src/mongo/lapsCards.mongo"
 import z from "zod"
 
@@ -18,7 +19,8 @@ async function extractData(formData: FormData) {
 }
 
 export async function addLapCardAction(_initialState: AddLapCardActionDTO, formData: FormData): Promise<AddLapCardActionDTO> {
+    const user = await auth();
     const data = await extractData(formData);
-    const result = await addLapsCard(data.swimmerId, data.laps, data.isNightCup);
+    const result = await addLapsCard(data.swimmerId, data.laps, data.isNightCup, user);
     return { id: result.id };
 }

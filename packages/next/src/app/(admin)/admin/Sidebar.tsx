@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaCalculator, FaSwimmer } from "react-icons/fa";
+import { FaListOl } from "react-icons/fa6";
 import { GrGroup, GrUser, GrUserAdd } from "react-icons/gr";
 import { LuLogOut } from "react-icons/lu";
 import { PiPasswordFill } from "react-icons/pi";
@@ -23,6 +24,11 @@ export function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
             <SidebarLink href="/admin/log" prefetch={false}>
                 <div>
                     <FaCalculator className="size-8" />
+                </div>
+            </SidebarLink>
+            <SidebarLink href="/admin/loggings" prefetch={false}>
+                <div>
+                    <FaListOl className="size-8" />
                 </div>
             </SidebarLink>
             {isAdmin && <SidebarLink href="/admin/users" prefetch={false}>

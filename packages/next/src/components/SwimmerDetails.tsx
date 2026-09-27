@@ -2,13 +2,12 @@ import Link from "next/link";
 import { dateToGermanDate, getAge, getGenderString } from "../lib";
 import { Swimmer, Team } from "../model";
 import { Detail } from "./Detail.component";
-import { LapsCard } from "../model/LapsCard.zod";
 
 function NotDefined() {
     return <span className="italic">Nicht angegeben</span>
 }
 
-export function SwimmerDetails({ swimmer, team, lapsCards }: { swimmer: Swimmer, team: Team | undefined, lapsCards: LapsCard[] | undefined | null }) {
+export function SwimmerDetails({ swimmer, team }: { swimmer: Swimmer, team: Team | undefined }) {
     const birthday = swimmer?.birthday ? new Date(swimmer.birthday) : undefined;
 
     return <>
@@ -26,18 +25,5 @@ export function SwimmerDetails({ swimmer, team, lapsCards }: { swimmer: Swimmer,
             <Detail title="Frühstück ">{swimmer.breakfast ? "Ja" : "Nein"}</Detail>
             <Detail title="Stadt">{swimmer.city ?? <NotDefined />}</Detail>
         </div>
-        {lapsCards && <div>
-            {lapsCards.map((lapCard) => <div key={lapCard._id.toString()}>
-                <div>
-                    {lapCard.id}
-                </div>
-                <div>
-                    {lapCard.isNightCup ? "Nachtpokal": ""}
-                </div>
-                <div>
-                    {lapCard.laps}
-                </div>
-            </div>)}
-        </div>}
     </>
 }

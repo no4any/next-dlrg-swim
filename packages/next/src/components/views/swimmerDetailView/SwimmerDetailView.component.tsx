@@ -9,7 +9,7 @@ import { finishToggleAction } from "./finishToggleAction.action";
 import Link from "next/link";
 import { LapsCard } from "@/src/model/LapsCard.zod";
 
-export function SwimmerDetailView({ swimmer, team, lapsCards }: { swimmer: Swimmer, team?: Team, lapsCards?: LapsCard[] | null }) {
+export function SwimmerDetailView({ swimmer, team }: { swimmer: Swimmer, team?: Team }) {
     const [currentSwimmer, setCurrentSwimmer] = useState(swimmer);
     const [disabled, startTransition] = useTransition();
 
@@ -33,6 +33,6 @@ export function SwimmerDetailView({ swimmer, team, lapsCards }: { swimmer: Swimm
             {swimmer.status === "REGISTERED" ? <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString()}/updateRegistration`} className="pr-2"><ButtonSuccess>Registrierung ändern</ButtonSuccess></Link> : <></>}
             {swimmer.status !== "ANNOUNCED" ?<ButtonWarn disabled={disabled} onClick={toggleFinish}>{swimmer.status === "REGISTERED" ? "Schwimmer beendet" : "Schwimmer reaktivieren"}</ButtonWarn> : <></>}
         </div>
-        <SwimmerDetails lapsCards={lapsCards} swimmer={swimmer} team={team} />
+        <SwimmerDetails swimmer={swimmer} team={team} />
     </div>
 }

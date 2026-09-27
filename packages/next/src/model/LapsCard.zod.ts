@@ -7,6 +7,7 @@ export const LapsCard = z.object({
     laps: z.number().min(1),
     swimmerId: MongoObjectId,
     isNightCup: z.boolean().nullish(),
+    editor: z.string()
 })
 
 export type LapsCard = z.infer<typeof LapsCard>;
