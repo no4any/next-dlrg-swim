@@ -26,6 +26,6 @@ export default async function LogSwimmerPage({ params }: { params: Promise<{ id:
             <AddLapCardForm swimmerId={swimmer._id.toString()}/>
         </div>
 
-        <SwimmerDetails swimmer={swimmer} team={team} />
+        <SwimmerDetails lapsCards={null} swimmer={swimmer} team={team} />
     </div>
 }
