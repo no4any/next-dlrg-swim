@@ -1,8 +1,6 @@
-import { ButtonSuccess } from "@/src/components/Button.component";
+import { ButtonError, ButtonSuccess } from "@/src/components/Button.component";
 import { Detail } from "@/src/components/Detail.component";
-import { dateToGermanDate, getAge, getGenderString } from "@/src/lib";
 import { generateHash } from "@/src/lib-server-only";
-import { getSwimmer } from "@/src/mongo/swimmer.mongo";
 import { getTeam } from "@/src/mongo/team.mongo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -30,6 +28,9 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
         <div className="py-4">
             <Link prefetch={false} href={`/anmelden/team/${team._id?.toString()}/${await generateHash(team._id?.toString() || "")}`}>
                 <ButtonSuccess>Inspizieren</ButtonSuccess>
+            </Link>
+            <Link className="ml-2" prefetch={false} href={`/admin/teams/${team._id?.toString()}/update`}>
+                <ButtonError>Teamname ändern</ButtonError>
             </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">

@@ -93,8 +93,7 @@ export async function addCommentToTeam(id: string | ObjectId, email: string, mes
 }
 
 async function updateTeamRaw(id: ObjectId, team: Partial<Team>) {
-    const { _id, ...restOfTeam } = Team.parse(team);
-    return (await collection)?.updateOne({ _id: id }, { $set: restOfTeam });
+    return (await collection)?.updateOne({ _id: id }, { $set: team });
 }
 export const updateTeam = cache(updateTeamRaw);
 
