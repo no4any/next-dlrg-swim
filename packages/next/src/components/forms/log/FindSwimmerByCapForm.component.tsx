@@ -27,7 +27,7 @@ export default function FindSwimmerByCapColorForm() {
             <div className="my-4">
                 <ColorSelect name="capColor" title="Kappenfarbe" />
             </div>
-            <Input disabled={pending} type="number" title="Registrierungsnummer" name="capNr" />
+            <Input disabled={pending} type="number" title="Nummer auf Badekappe" name="capNr" />
             <SubmitButton className="mt-4 w-full">Swimmer nach Badekappe suchen</SubmitButton>
         </Form>
     </div>
