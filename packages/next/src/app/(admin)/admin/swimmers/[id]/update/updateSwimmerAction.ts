@@ -12,7 +12,7 @@ const DTO = z.object({
     id: MongoObjectId,
     firstname: z.string().min(3).max(255),
     lastname: z.string().min(3).max(255),
-    birthday: z.iso.date(),
+    birthday: z.iso.date().nullish(),
     city: z.string().min(0).max(255),
     gender: z.enum(["0", "M", "W"]),
     noPublishName: z.boolean(),
@@ -25,8 +25,10 @@ export async function updateSwimmerAction(_initialData: unknown, formData: FormD
     let id;
     try {
         const obj = Object.fromEntries(formData);
+        console.log(obj);
         const validObj = DTO.parse({
             ...obj,
+            birthday: obj.birthday.toString().length ? obj.birthday : undefined,
             noPublishName: obj.noPublishName === "on",
             breakfast: obj.breakfast === "on",
             newsletter: obj.newsletter === "on",
@@ -51,6 +53,7 @@ export async function updateSwimmerAction(_initialData: unknown, formData: FormD
                 errors: e.issues.map((issue) => issue.message)
             }
         }
+        console.log(e);
         return { errors: ['Unbekannter fehler!'] }
     }
 
