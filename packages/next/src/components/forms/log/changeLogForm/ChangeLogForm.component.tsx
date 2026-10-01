@@ -23,7 +23,9 @@ export function ChangeLogForm({ log }: { log: LapsCard }) {
         </HintBox>}
         <Form action={formAction}>
             <Input inputMode="numeric" min={0} max={300} disabled={pending} type="number" defaultValue={log.laps} name="laps" title="Bahnen" />
+            <hr className="my-4" />
             <CheckBox name="isNightCup" defaultChecked={!!log.isNightCup}>Nachtpokal</CheckBox>
+            <hr className="my-4" />
             <input type="hidden" name="id" value={log._id.toString()} />
             <ResetButton className="mt-2 w-full">Zurücksetzen</ResetButton>
             <SubmitButton className="mt-2 w-full" disabled={pending}>Ändern</SubmitButton>
