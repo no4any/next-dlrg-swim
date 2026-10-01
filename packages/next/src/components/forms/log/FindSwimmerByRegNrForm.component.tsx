@@ -23,7 +23,7 @@ export default function FindSwimmerByRegNrForm() {
         </HintBox>}
         <Form action={formAction}>
             <div className="my-4">
-                <Input disabled={pending} type="number" title="Registrierungsnummer" name="regNr" />
+                <Input disabled={pending} inputMode="numeric" type="number" title="Registrierungsnummer" name="regNr" />
             </div>
             <SubmitButton className="w-full">Swimmer nach Registrierungsnummer suchen</SubmitButton>
         </Form>

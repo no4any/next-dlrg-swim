@@ -14,7 +14,7 @@ export function AddLapCardForm({ swimmerId }: { swimmerId: string }) {
     return <div className="mb-4">
         {state.id && <h2>Erfasst mit ID {state.id}</h2>}
         <Form action={formAction}>
-            <Input disabled={pending || !!state.id} type="number" name="laps" title="Bahnen" />
+            <Input inputMode="numeric" min={0} max={300} disabled={pending || !!state.id} type="number" name="laps" title="Bahnen" />
             <input  disabled={pending|| !!state.id} type="hidden" name="swimmerId" value={swimmerId} />
             <CheckBox disabled={pending|| !!state.id} name="isNightCup">Nachpokal</CheckBox>
             {!state.id && <SubmitButton disabled={pending|| !!state.id} className="w-full">Karte anlegen</SubmitButton>}
