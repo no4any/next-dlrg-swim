@@ -22,7 +22,7 @@ export function ChangeLogForm({ log }: { log: LapsCard }) {
             {state.errors?.map((error, i) => <Hint key={i} type="ERROR">{error}</Hint>)}
         </HintBox>}
         <Form action={formAction}>
-            <Input disabled={pending} type="number" defaultValue={log.laps} name="laps" title="Bahnen" />
+            <Input inputMode="numeric" min={0} max={300} disabled={pending} type="number" defaultValue={log.laps} name="laps" title="Bahnen" />
             <CheckBox name="isNightCup" defaultChecked={!!log.isNightCup}>Nachtpokal</CheckBox>
             <input type="hidden" name="id" value={log._id.toString()} />
             <ResetButton className="mt-2 w-full">Zurücksetzen</ResetButton>
