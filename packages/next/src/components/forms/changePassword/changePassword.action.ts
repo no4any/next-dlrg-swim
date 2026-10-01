@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { ChangePasswordFormState } from "./ChangePasswordForm.component";
 import { ZodError } from "zod";
-import { getLogin } from "@/src/lib";
+import { auth, getLogin } from "@/src/lib";
 import { PasswordString } from "@/src/model";
 import { authUser, updateUserPassword } from "@/src/mongo/user.mongo";
 
@@ -23,7 +23,7 @@ function getFormData(formData: FormData): NewPasswordCredentials {
 
 
 export async function changePassword(_initialState: ChangePasswordFormState, formData: FormData): Promise<ChangePasswordFormState> {
-    const username = await getLogin();
+    const username = await auth();
     if (!username) redirect('/login');
     try {
         const credentials = getFormData(formData);
