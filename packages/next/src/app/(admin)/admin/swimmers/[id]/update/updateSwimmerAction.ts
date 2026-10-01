@@ -47,7 +47,6 @@ export async function updateSwimmerAction(_initialData: unknown, formData: FormD
         console.log(result);
         if (result.modifiedCount <= 0) return { errors: ['Unbekannter fehler!'] }
     } catch (e) {
-        console.log(e);
         if (e instanceof ZodError) {
             return {
                 errors: e.issues.map((issue) => issue.message)
