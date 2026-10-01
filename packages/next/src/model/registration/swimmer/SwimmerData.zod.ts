@@ -26,7 +26,7 @@ export const SwimmerData = z.object({
     publishName: z.boolean().nullish(),
     capColor: CapColor.nullish(),
     capNr: z.number().min(1).max(100).nullish(),
-    regNr: z.number().min(1000).max(9999).nullish(),
+    regNr: z.number().min(100).max(999).nullish(),
     newsletter: z.boolean().nullish(),
     comments: z.array(Comment).nullish()
 })

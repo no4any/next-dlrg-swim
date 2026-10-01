@@ -55,8 +55,7 @@ export async function addSwimmer(swimmer: Swimmer) {
 }
 
 export async function updateSwimmer(id: ObjectId, swimmer: Partial<Swimmer>) {
-    const { _id, ...restOfSwimmer } = Swimmer.parse(swimmer);
-    return (await collection)?.updateOne({ _id: id }, { $set: restOfSwimmer });
+    return (await collection)?.updateOne({ _id: id }, { $set: swimmer });
 }
 
 export async function deleteManagedSwimmer(id: ObjectId | string) {

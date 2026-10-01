@@ -3,11 +3,10 @@
 import { Swimmer, Team } from "@/src/model";
 import { useEffect, useState, useTransition } from "react";
 import { Tags } from "../../Tags.component";
-import { ButtonSuccess, ButtonWarn } from "../../Button.component";
+import { ButtonError, ButtonSuccess, ButtonWarn } from "../../Button.component";
 import { SwimmerDetails } from "../../SwimmerDetails";
 import { finishToggleAction } from "./finishToggleAction.action";
 import Link from "next/link";
-import { LapsCard } from "@/src/model/LapsCard.zod";
 
 export function SwimmerDetailView({ swimmer, team }: { swimmer: Swimmer, team?: Team }) {
     const [currentSwimmer, setCurrentSwimmer] = useState(swimmer);
@@ -18,9 +17,9 @@ export function SwimmerDetailView({ swimmer, team }: { swimmer: Swimmer, team?: 
     }, [swimmer]);
 
     function toggleFinish() {
-        startTransition(async ()=>{
+        startTransition(async () => {
             const resultSwimmer = await finishToggleAction(currentSwimmer._id);
-            if(resultSwimmer) setCurrentSwimmer(resultSwimmer);
+            if (resultSwimmer) setCurrentSwimmer(resultSwimmer);
         })
     }
 
@@ -31,7 +30,8 @@ export function SwimmerDetailView({ swimmer, team }: { swimmer: Swimmer, team?: 
         <div className="py-4">
             {swimmer.status === "ANNOUNCED" ? <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString()}/register`} className="pr-2"><ButtonSuccess>Anmelden</ButtonSuccess></Link> : <></>}
             {swimmer.status === "REGISTERED" ? <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString()}/updateRegistration`} className="pr-2"><ButtonSuccess>Registrierung ändern</ButtonSuccess></Link> : <></>}
-            {swimmer.status !== "ANNOUNCED" ?<ButtonWarn disabled={disabled} onClick={toggleFinish}>{swimmer.status === "REGISTERED" ? "Schwimmer beendet" : "Schwimmer reaktivieren"}</ButtonWarn> : <></>}
+            {swimmer.status !== "ANNOUNCED" ? <span className="pr-2"><ButtonWarn disabled={disabled} onClick={toggleFinish}>{swimmer.status === "REGISTERED" ? "Schwimmer beendet" : "Schwimmer reaktivieren"}</ButtonWarn></span> : <></>}
+            <Link href={`/admin/swimmers/${swimmer._id?.toString()}/update`}><ButtonError disabled={disabled}>Anmeldedaten ändern</ButtonError></Link>
         </div>
         <SwimmerDetails swimmer={swimmer} team={team} />
     </div>
