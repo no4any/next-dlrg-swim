@@ -2,6 +2,9 @@ import { ObjectId } from "mongodb";
 import { counterNext } from "./counter.mongo";
 import { getLapsCardsCollection } from "./mongoClient";
 import { getSwimmer } from "./swimmer.mongo";
+import { getTeam } from "./team.mongo";
+import { LapsCard } from "../model/LapsCard.zod";
+import { Team } from "../model";
 
 const COUNTER_NAME = "LAPS_COUNTER";
 
@@ -48,4 +51,15 @@ export async function getLapsCardByCustomId(id: number) {
     const col = await collection;
     const result = await col.findOne({ id: id });
     return result;    
+}
+
+export async function getLapsForTeam(teamId: string | ObjectId): Promise<LapsCard[]> {
+    const team = await getTeam(teamId);
+    if(!team) return [];
+    const simmerIds = team.swimmers.map(swimmer => swimmer._id as ObjectId);
+    const col = await collection;
+    const result = (await collection).find({
+        swimmerId: { $in: simmerIds }
+    }).toArray();
+    return result;
 }

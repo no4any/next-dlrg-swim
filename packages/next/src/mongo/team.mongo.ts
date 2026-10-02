@@ -2,6 +2,7 @@ import { cache } from "react";
 import { ObjectId } from "mongodb";
 import { Swimmer, Team } from "../model";
 import { getTeamsCollection } from "./mongoClient";
+import { getLapsForTeam } from "./lapsCards.mongo";
 
 const collection = getTeamsCollection();
 
@@ -101,3 +102,13 @@ async function deleteTeamRaw(id: ObjectId) {
     return (await collection)?.deleteOne({ _id: id });
 }
 export const deleteTeam = cache(deleteTeamRaw);
+
+export async function getAllTeamsWithResult() {
+    const team = await getAllTeams();
+    return await Promise.all(team.map(async (t) => {
+        return {
+            ...t,
+            laps: await getLapsForTeam(t._id ?? "")
+        }
+    }));
+}

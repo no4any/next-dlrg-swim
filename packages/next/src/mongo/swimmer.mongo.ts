@@ -2,6 +2,7 @@ import { cache } from "react";
 import { CapColor, RegistrationStatus, Swimmer } from "../model/registration/swimmer";
 import { ObjectId } from "mongodb";
 import { getSwimmersCollection } from "./mongoClient";
+import { LapsCard } from "../model/LapsCard.zod";
 
 const collection = getSwimmersCollection();
 
@@ -28,6 +29,20 @@ async function getSwimmerByCapRaw(capNr: number, capColor: CapColor) {
     return (await collection)?.findOne({ capColor, capNr });
 }
 export const getSwimmerByCap = cache(getSwimmerByCapRaw);
+
+async function getAllSwimmersWithResultsRaw():Promise<(Swimmer & { laps: LapsCard[] })[]> {
+    return (await collection)?.aggregate<Swimmer & { laps: LapsCard[] }>([
+        {
+            $lookup: {
+                from: "lapsCards",
+                localField: "_id",
+                foreignField: "swimmerId",
+                as: "laps"
+            }
+        }
+    ]).toArray();
+}
+export const getAllSwimmersWithResults = cache(getAllSwimmersWithResultsRaw);
 
 async function getAllSwimmersRaw() {
     return (await collection)?.aggregate<Swimmer>([
