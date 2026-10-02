@@ -4,9 +4,9 @@ import { Swimmer } from "../model";
 import { Medal } from "./Medal.component";
 import { Status } from "./Status.component";
 
-export function Tags({ swimmer }: { swimmer: Swimmer }) {
+export function Tags({ swimmer, distance }: { swimmer: Swimmer, distance: number }) {
     return <>
         <Status status={swimmer.status} />
-        <Medal distance={500} swimmer={swimmer} />
+        <Medal distance={distance} swimmer={swimmer} />
     </>
 }

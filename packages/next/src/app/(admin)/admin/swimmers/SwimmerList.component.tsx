@@ -1,6 +1,8 @@
 import { Tags } from "@/src/components/Tags.component";
 import { borderColorForCapColor, colorForCapColor, dateToGermanDate, flat, getAge, getGenderString } from "@/src/lib";
+import { calcLaps } from "@/src/lib/calcLaps";
 import { Swimmer, Team } from "@/src/model";
+import { getLapsCards } from "@/src/mongo/lapsCards.mongo";
 import Link from "next/link";
 
 export async function SwimmerList({ swimmers, noTeam }: { noTeam?: boolean, swimmers: (Swimmer & { team?: Team })[] }) {
@@ -16,11 +18,12 @@ export async function SwimmerList({ swimmers, noTeam }: { noTeam?: boolean, swim
         {Promise.all(swimmers.map(async (swimmer) => {
             const birthday = swimmer.birthday ? new Date(swimmer.birthday) : undefined;
             const teamname = swimmer.team ? swimmer.team.name : undefined;
+            const distance = await calcLaps(await getLapsCards(swimmer._id)) * 50;
             return <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString() ?? '12312312'}`} key={swimmer._id?.toString()}>
                 <div>
                     <div className="flex flex-row gap-0.5 hover:bg-gray-200 rounded-md p-1">
                         <div className="flex-1 flex-row flex gap-1 text-2xl">
-                            <Tags swimmer={await flat(swimmer)} />
+                            <Tags swimmer={await flat(swimmer)} distance={distance} />
                         </div>
                         <div className="flex-3">{swimmer.firstName}</div>
                         <div className="flex-3">{swimmer.lastName}</div>
