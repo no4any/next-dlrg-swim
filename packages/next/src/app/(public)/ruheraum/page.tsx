@@ -12,7 +12,7 @@ export default async function RuheraumPage() {
                 <li>Sich leise verhalten</li>
                 <li>Schuhe vorm Betreten der Turnhalle ausziehen</li>
                 <li className="font-bold">Nichts zurücklassen - insbesondere keinen Müll</li>
-                <li className="font-bold">Verursache Verschmutzungen und Verunreinigungen selbstständig beseitigen</li>
+                <li className="font-bold">Verursachte Verschmutzungen und Verunreinigungen selbstständig beseitigen</li>
             </ul>
         </div>
     </div>
