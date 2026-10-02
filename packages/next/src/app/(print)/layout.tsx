@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import "./print.scss";
 import type { Metadata } from "next";
 
@@ -16,7 +17,9 @@ export default function LoginLayout({
       <body
         className={`antialiased`}
       >
-        {children}
+        <Suspense>
+          {children}
+        </Suspense>
       </body>
     </html>
   );

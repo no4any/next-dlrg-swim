@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "zod";
 import { RegistrationStatus } from "./RegistrationStatus.zod";
 import { MongoObjectId } from "../../MongoObjectId.zod";
 import { Comment } from "../Comment.zod";
@@ -21,7 +21,8 @@ export const SwimmerData = z.object({
         .min(2, { error: "Der Ort muss mindestens 2 Buchstaben haben" })
         .max(255, { error: "Der Ort darf nicht mehr als 255 Buchstaben haben" })
         .nullish(),
-    birthday: z.iso.date().nullish(),
+    birthday: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, { message: "Das Geburtsdatum muss im Format YYYY-MM-DD sein" }).nullish(),
+    //birthday: z.iso.date().nullish(),
     breakfast: z.boolean().nullish(),
     publishName: z.boolean().nullish(),
     capColor: CapColor.nullish(),
