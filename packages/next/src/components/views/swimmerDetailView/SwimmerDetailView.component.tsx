@@ -31,8 +31,8 @@ export function SwimmerDetailView({ swimmer, team }: { swimmer: Swimmer, team?: 
             {swimmer.status === "ANNOUNCED" ? <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString()}/register`} className="pr-2"><ButtonSuccess>Anmelden</ButtonSuccess></Link> : <></>}
             {swimmer.status === "REGISTERED" ? <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString()}/updateRegistration`} className="pr-2"><ButtonSuccess>Registrierung ändern</ButtonSuccess></Link> : <></>}
             {swimmer.status !== "ANNOUNCED" ? <span className="pr-2"><ButtonWarn disabled={disabled} onClick={toggleFinish}>{swimmer.status === "REGISTERED" ? "Schwimmer beendet" : "Schwimmer reaktivieren"}</ButtonWarn></span> : <></>}
-            <Link className="pr-2" href={`/admin/swimmers/${swimmer._id?.toString()}/update`}><ButtonError disabled={disabled}>Anmeldedaten ändern</ButtonError></Link>
-            <Link href={`/admin/swimmers/${swimmer._id?.toString()}/updateTeam`}><ButtonError disabled={disabled}>Team ändern</ButtonError></Link>
+            {swimmer.type !== "MANAGED" ? <Link className="pr-2" href={`/admin/swimmers/${swimmer._id?.toString()}/updateTeam`}><ButtonError disabled={disabled}>Team ändern</ButtonError></Link> : <></>}
+            <Link href={`/admin/swimmers/${swimmer._id?.toString()}/update`}><ButtonError disabled={disabled}>Anmeldedaten ändern</ButtonError></Link>
         </div>
         <SwimmerDetails swimmer={swimmer} team={team} />
     </div>

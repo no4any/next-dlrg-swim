@@ -13,8 +13,9 @@ export default async function UpdateSwimmerPage({ params }: { params: Promise<{ 
     const { id } = await params;
     const swimmer = await flat(await getSwimmer(id));
     const teams = await flat(await getAllTeams());
-
+    
     if(!swimmer) notFound();
+    if(swimmer.type === "MANAGED") notFound();
 
     return <div>
         <h1>Team ändern: {swimmer.firstName} {swimmer.lastName}</h1>
