@@ -8,6 +8,7 @@ import { SwimmerList } from "../../swimmers/SwimmerList.component";
 import { CommentsForm } from "@/src/components/forms/comments/CommentsForm.component";
 import { CommentList } from "@/src/components/CommentList.component";
 import { connection } from "next/server";
+import { flat } from "@/src/lib";
 
 export const instant = false;
 
@@ -31,6 +32,9 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
             </Link>
             <Link className="ml-2" prefetch={false} href={`/admin/teams/${team._id?.toString()}/update`}>
                 <ButtonError>Teamname ändern</ButtonError>
+            </Link>
+            <Link className="ml-2" prefetch={false} href={`/admin/teams/${team._id?.toString()}/type`}>
+                <ButtonError>Teamart ändern</ButtonError>
             </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
