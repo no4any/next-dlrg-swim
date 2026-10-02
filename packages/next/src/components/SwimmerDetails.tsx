@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { dateToGermanDate, getAge, getGenderString } from "../lib";
+import { colorForCapColor, dateToGermanDate, getAge, getGenderString } from "../lib";
 import { Swimmer, Team } from "../model";
 import { Detail } from "./Detail.component";
+import { capColorToReadable } from "../lib/capColorToReadable.function";
 
 function NotDefined() {
     return <span className="italic">Nicht angegeben</span>
@@ -15,7 +16,7 @@ export function SwimmerDetails({ swimmer, team }: { swimmer: Swimmer, team: Team
             <Detail title="Vorname">{swimmer.firstName}</Detail>
             <Detail title="Nachname">{swimmer.lastName}</Detail>
             <Detail title="E-Mail">{swimmer.email ?? <NotDefined />}</Detail>
-            <Detail title="Badekappe">{swimmer.capColor && swimmer.capNr ? <span>{swimmer.capColor} - {swimmer.capNr}</span> : <NotDefined />}</Detail>
+            <Detail title="Badekappe">{swimmer.capColor && swimmer.capNr ? <span className={`rounded-md md:block ${colorForCapColor(swimmer.capColor || "WHITE")}`}>{capColorToReadable(swimmer.capColor)} - {swimmer.capNr}</span> : <NotDefined />}</Detail>
             <Detail title="Registriernummer">{swimmer.regNr ? <span>{swimmer.regNr}</span> : <NotDefined />}</Detail>
             <Detail title="Team">{team ? <Link prefetch={false} href={`/admin/teams/${team._id?.toString()}`}>{team.name}</Link> : <NotDefined />}</Detail>
             <Detail title="Geschlecht">{getGenderString(swimmer.gender)}</Detail>

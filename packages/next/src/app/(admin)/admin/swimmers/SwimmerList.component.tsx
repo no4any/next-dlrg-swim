@@ -1,6 +1,7 @@
 import { Tags } from "@/src/components/Tags.component";
 import { borderColorForCapColor, colorForCapColor, dateToGermanDate, flat, getAge, getGenderString } from "@/src/lib";
 import { calcLaps } from "@/src/lib/calcLaps";
+import { capColorToReadable } from "@/src/lib/capColorToReadable.function";
 import { Swimmer, Team } from "@/src/model";
 import { getLapsCards } from "@/src/mongo/lapsCards.mongo";
 import Link from "next/link";
@@ -28,7 +29,9 @@ export async function SwimmerList({ swimmers, noTeam }: { noTeam?: boolean, swim
                         <div className="flex-3">{swimmer.firstName}</div>
                         <div className="flex-3">{swimmer.lastName}</div>
                         {!noTeam && <div className="flex-3 hidden md:block">{teamname ?? <span className="italic text-dlrg-gray">Kein Team</span>}</div>}
-                        <div className={`flex-3 hidden md:block ${colorForCapColor(swimmer.capColor || "WHITE")} ${borderColorForCapColor(swimmer.capColor || "WHITE")}`}>{swimmer.capColor}-{swimmer.capNr}:{swimmer.regNr}</div>
+                        {swimmer.capColor && swimmer.capNr ?
+                            <div className={`flex-3 hidden rounded-md md:block ${colorForCapColor(swimmer.capColor || "WHITE")} ${borderColorForCapColor(swimmer.capColor || "WHITE")}`}>{capColorToReadable(swimmer.capColor || "WHITE")}-{swimmer.capNr} (Reg:{swimmer.regNr})</div>
+                            : <div className="flex-3"></div>}
                         <div className="flex-3 hidden md:block">{birthday && dateToGermanDate(birthday)} {birthday && <>({getAge(birthday)})</>}</div>
                     </div>
                 </div>
