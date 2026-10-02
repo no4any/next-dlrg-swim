@@ -6,7 +6,7 @@ export const instant = false;
 
 export default async function TeamsPage() {
     await connection();
-    const teams = await getAllTeams();
+    const teams = (await getAllTeams()).sort((a, b) => a.name.localeCompare(b.name));
 
     return <div>
         <h1>Teams</h1>
