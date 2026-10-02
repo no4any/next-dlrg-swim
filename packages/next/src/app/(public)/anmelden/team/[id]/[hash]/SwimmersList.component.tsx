@@ -32,9 +32,9 @@ function SwimmerItem({ swimmer, teamId, teamHash }: { swimmer: Swimmer, teamId: 
             <div className="flex-1">{statusToString(swimmer.status)}</div>
             <div className="flex-1 hidden xl:block">{swimmer.breakfast && "Ja"}</div>
             <div className="flex-1 hidden xl:block">{swimmer.publishName && "Ja"}</div>
-            <div className="flex-1">{swimmer.type === "MANAGED" && <ButtonError onClick={() => {
-                if(confirm(`${swimmer.firstName} ${swimmer.lastName} wirklich löschen?`)) return removeSwimmer(swimmer._id?.toString() || "", teamId, teamHash)
-            }}>Löschen</ButtonError>}</div>
+            <div className="flex-1">{swimmer.type === "MANAGED" && swimmer.status === "ANNOUNCED" ? <ButtonError onClick={() => {
+                if (confirm(`${swimmer.firstName} ${swimmer.lastName} wirklich löschen?`)) return removeSwimmer(swimmer._id?.toString() || "", teamId, teamHash)
+            }}>Löschen</ButtonError> : <></>}</div>
         </div>
     </div>
 }
