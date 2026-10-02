@@ -137,3 +137,15 @@ export async function setSwimmerStatus(id: string | ObjectId, status: Registrati
     });
     return result.modifiedCount > 0;
 }
+
+export async function removeCap(id: string | ObjectId): Promise<boolean> {
+    const result = await (await collection).updateOne({
+        _id: id instanceof ObjectId ? id : new ObjectId(id)
+    }, {
+        $unset: {
+            capColor: 1,
+            capNr: 1
+        }
+    });
+    return result.modifiedCount > 0;
+}
