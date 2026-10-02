@@ -10,7 +10,7 @@ import Link from "next/link";
 import { Medal } from "@/src/lib";
 import { removeCapAction } from "./removeCapAction";
 
-export function SwimmerDetailView({ swimmer, team, medal }: { swimmer: Swimmer, team?: Team, medal?: Medal }) {
+export function SwimmerDetailView({ swimmer, team, medal, link }: { swimmer: Swimmer, team?: Team, medal?: Medal, link: string }) {
     const [currentSwimmer, setCurrentSwimmer] = useState(swimmer);
     const [disabled, startTransition] = useTransition();
 
@@ -30,6 +30,7 @@ export function SwimmerDetailView({ swimmer, team, medal }: { swimmer: Swimmer, 
             <Tags swimmer={currentSwimmer} />
         </div>
         <div className="py-4">
+            <Link prefetch={false} href={link} className="pr-2"><ButtonSuccess>Inspizieren</ButtonSuccess></Link>
             {swimmer.status === "ANNOUNCED" ? <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString()}/register`} className="pr-2"><ButtonSuccess>Anmelden</ButtonSuccess></Link> : <></>}
             {swimmer.status === "REGISTERED" ? <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString()}/updateRegistration`} className="pr-2"><ButtonSuccess>Registrierung ändern</ButtonSuccess></Link> : <></>}
             {swimmer.status !== "ANNOUNCED" ? <span className="pr-2"><ButtonWarn disabled={disabled} onClick={toggleFinish}>{swimmer.status === "REGISTERED" ? "Schwimmer beendet" : "Schwimmer reaktivieren"}</ButtonWarn></span> : <></>}

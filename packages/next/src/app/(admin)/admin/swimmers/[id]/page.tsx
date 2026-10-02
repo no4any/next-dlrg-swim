@@ -9,6 +9,7 @@ import { SwimmerLapsDetails } from "@/src/components/SwimmerLapsDetails.componen
 import { CommentsForm } from "@/src/components/forms/comments/CommentsForm.component";
 import { CommentList } from "@/src/components/CommentList.component";
 import { calcLaps } from "@/src/lib/calcLaps";
+import { generateHash } from "@/src/lib-server-only";
 
 export const instant = false;
 
@@ -18,6 +19,7 @@ export default async function SwimmerPage({ params }: { params: Promise<{ id: st
     const { id } = await params;
     const swimmer = await getSwimmer(id);
     if (!swimmer) notFound();
+    const hash = await generateHash(id);
     const team = swimmer.teamId ? await getTeam(swimmer.teamId) : null;
     const laps = await flat(await getLapsCards(id));
 
@@ -28,7 +30,7 @@ export default async function SwimmerPage({ params }: { params: Promise<{ id: st
 
     return <div>
         <h1 className="flex flex-col">Schwimmer: {swimmer.firstName} {swimmer.lastName}</h1>
-        <SwimmerDetailView swimmer={await flat(swimmer)} team={team ? await flat(team) : undefined} medal={getYouthMedal(lapsCount * 50, birthdayDateObj)} />
+        <SwimmerDetailView swimmer={await flat(swimmer)} link={`/anmelden/schwimmer/${id}/${hash}`} team={team ? await flat(team) : undefined} medal={getYouthMedal(lapsCount * 50, birthdayDateObj)} />
         <h2 className="mt-4">Bahnen</h2>
         <SwimmerLapsDetails laps={laps} />
         <div>

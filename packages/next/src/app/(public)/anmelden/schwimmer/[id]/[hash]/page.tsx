@@ -1,10 +1,15 @@
 import { Hint } from "@/src/components/Hint.component";
 import { HintBox } from "@/src/components/HintBox.component";
+import { getYouthMedal } from "@/src/lib";
 import { generateHash } from "@/src/lib-server-only";
+import { calcLaps } from "@/src/lib/calcLaps";
 import { dateToGermanDate } from "@/src/lib/dateToGermanyDate.function";
 import { getAge } from "@/src/lib/getAge.function";
 import { getGenderString } from "@/src/lib/getGenderString.function";
+import { LapsCard } from "@/src/model/LapsCard.zod";
+import { getLapsCards } from "@/src/mongo/lapsCards.mongo";
 import { getSwimmer } from "@/src/mongo/swimmer.mongo";
+import { getTeam } from "@/src/mongo/team.mongo";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -12,7 +17,12 @@ export default async function SwimmerPage({ params }: { params: Promise<{ id: st
     const { id, hash } = await params;
     if (await generateHash(id) !== hash) notFound();
     const swimmer = await getSwimmer(id);
-    if (!swimmer) notFound()
+    if (!swimmer) notFound();
+
+    const laps = await getLapsCards(id);
+    const lapsCount = await calcLaps(laps);
+    const team = swimmer.teamId ? await getTeam(swimmer.teamId) : null;
+    const medal = getYouthMedal(lapsCount * 50, swimmer.birthday ? new Date(swimmer.birthday) : undefined);
 
     return <div>
         <h1>Übersicht zu Ihrer Anmeldung</h1>
@@ -36,7 +46,15 @@ export default async function SwimmerPage({ params }: { params: Promise<{ id: st
             <Detail title="Namen veröffentlichen">{!!swimmer.publishName ? "Ja" : "Nein"}</Detail>
             <Detail title="Frühstück">{!!swimmer.breakfast ? "Ja" : "Nein"}</Detail>
             <Detail title="Newsletter">{!!swimmer.newsletter ? "Ja" : "Nein"}</Detail>
+            {swimmer.teamId && <Detail title="Team">{team?.name}</Detail>}
         </div>
+        {medal ? <div className="mt-4">
+            <h2 className="font-bold text-dlrg-blue">Du hast {medal} erreicht. Hol Dir deine Medallie bei der Anmeldung!</h2>
+        </div> : null}
+        {lapsCount > 0 ? <div className="mt-4">
+            <h2>Erfasste Bahnen: {lapsCount}</h2>
+            <SwimmerLapsDetails laps={laps} />
+        </div> : null}
     </div>
 }
 
@@ -44,5 +62,21 @@ function Detail({ children, title }: { title: string | React.ReactElement, child
     return <div className="flex flex-row gap-4">
         <div className="font-bold">{title}:</div>
         <div>{children}</div>
+    </div>
+}
+
+export function SwimmerLapsDetails({ laps }: { laps?: LapsCard[] | null }) {
+    return laps && laps.length && <div>
+        <div className="flex flex-row gap-0-5 p-1 font-bold sticky">
+            <div className="flex-1">ID</div>
+            <div className="flex-1">Pokal</div>
+            <div className="flex-1">Bahnen</div>
+        </div>
+        {laps.map((lap, index) => <div key={lap.id} className="flex flex-row gap-0-5 hover:bg-gray-200 rounded-md p-1">
+            <div className="flex-1">{lap.id}</div>
+            <div className="flex-1">{lap.isNightCup && "Nachpokal"}</div>
+            <div className="flex-1">{lap.laps}</div>
+        </div>
+        )}
     </div>
 }
