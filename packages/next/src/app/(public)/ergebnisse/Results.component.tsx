@@ -20,7 +20,7 @@ export async function Results() {
         return `${swimmer.lastName}, ${swimmer.firstName}`
     }
 
-    const swimmersWithResults = (await getAllSwimmersWithResults()).sort((a, b) => name(a).localeCompare(name(b)));
+    const swimmersWithResults = (await getAllSwimmersWithResults()).filter(s => s.publishName).sort((a, b) => name(a).localeCompare(name(b)));
     const teams = (await getAllTeamsWithResult()).sort((a, b) => a.name.localeCompare(b.name));
 
     return <div>
