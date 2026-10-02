@@ -1,4 +1,6 @@
 import { getLogin } from "@/src/lib";
+import { getAllCounter } from "@/src/mongo/counter.mongo";
+import { getAllLapsCards } from "@/src/mongo/lapsCards.mongo";
 import { backupSwimmer } from "@/src/mongo/swimmer.mongo";
 import { backupTeam } from "@/src/mongo/team.mongo";
 import { NextRequest, NextResponse } from "next/server";
@@ -10,6 +12,8 @@ export async function GET(_request: NextRequest) {
 
     return NextResponse.json({
         swimmers: await backupSwimmer(),
-        teams: await backupTeam()
+        teams: await backupTeam(),
+        laps: await getAllLapsCards(),
+        counters: await getAllCounter()
     })
 }

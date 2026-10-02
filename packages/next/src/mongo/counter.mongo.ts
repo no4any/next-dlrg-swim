@@ -16,3 +16,9 @@ export async function counterNext(name: string) {
 
     return result.count;
 }
+
+export async function getAllCounter() {
+    const col = await collection;
+    const result = await col.find({}).toArray();
+    return result;
+}
