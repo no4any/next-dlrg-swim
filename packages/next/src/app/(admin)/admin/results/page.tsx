@@ -1,4 +1,4 @@
-import { getAge } from "@/src/lib";
+import { dateToGermanDate } from "@/src/lib";
 import getResultsAction from "@/src/lib/getResultsAction";
 import { Swimmer, Team } from "@/src/model";
 import Link from "next/link";
@@ -26,6 +26,11 @@ export default async function RankPage() {
         <div>
             <Link prefetch={false} href="/admin/print"><h3 className="text-dlrg-red">Urkunden drucken</h3></Link>
         </div>
+
+        {results.youngestMale && <SingleResult title="Jüngster Teilnehmer (männlich)" swimmer={results.youngestMale} />}
+        {results.youngestFemale && <SingleResult title="Jüngster Teilnehmer (weiblich)" swimmer={results.youngestFemale} />}
+        {results.oldestMale && <SingleResult title="Ältester Teilnehmer (männlich)" swimmer={results.oldestMale} />}
+        {results.oldestFemale && <SingleResult title="Ältester Teilnehmer (weiblich)" swimmer={results.oldestFemale} />}
 
         <Result title="Weiteste Strecke" swimmers={results.swimmers}></Result>
         <Result title="Weiteste Strecke männlich" swimmers={results.swimmersMale}></Result>
@@ -56,6 +61,32 @@ export default async function RankPage() {
     </div>
 }
 
+function SingleResult({ title, swimmer, night }: {
+    title: string,
+    swimmer: (Swimmer & {
+        total: number,
+        night: number,
+        age: number
+    }),
+    night?: boolean
+}) {
+    return <div className="mt-4">
+        <h2>{title}</h2>
+        <div className="grid grid-cols-4">
+            <div><b>Name</b></div>
+            <div><b>Vorname</b></div>
+            <div><b>Alter</b></div>
+            <div><b>Geschwommen</b></div>
+        </div>
+        <div className="grid grid-cols-4">
+            <div>{swimmer.publishName ? swimmer.lastName : ""}</div>
+            <div>{swimmer.publishName ? swimmer.firstName : ""}</div>
+            <div>{dateToGermanDate(new Date(swimmer.birthday as string))} ({swimmer.age})</div>
+            <div>{(night ? swimmer.night : swimmer.total).toLocaleString('de-DE')}m</div>
+        </div>
+    </div>
+}
+
 function Result({ title, swimmers, night }: {
     title: string,
     swimmers: (Swimmer & {
@@ -65,7 +96,7 @@ function Result({ title, swimmers, night }: {
     })[],
     night?: boolean
 }) {
-    return <div>
+    return <div className="mt-4">
         <h2>{title}</h2>
         <div className="grid grid-cols-5">
             <div><b>Platz</b></div>
@@ -92,7 +123,7 @@ function TeamResult({ title, teams, average }: {
     })[],
     average?: boolean
 }) {
-    return <div>
+    return <div className="mt-4">
         <h2>{title}</h2>
         <div className="grid grid-cols-4">
             <div><b>Platz</b></div>

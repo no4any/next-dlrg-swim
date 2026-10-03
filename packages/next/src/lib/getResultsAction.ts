@@ -94,35 +94,35 @@ export default async function getResultsAction() {
         teams: teams,
         teamsAvg: teamsAvg,
 
-        youngestMale1: (await getAllSwimmers())
-            .filter(s => s.status !== "ANNOUNCED")
-            .filter(s => s.publishName)
-            .filter(s => s.gender === "M")
-            .filter(s => s.birthday)
-            .sort((a, b) => a > b ? 1 : -1)
-            .find(_s => true),
-        youngestFemale: (await getAllSwimmers())
-            .filter(s => s.status !== "ANNOUNCED")
-            .filter(s => s.publishName)
-            .filter(s => s.gender === "W")
-            .filter(s => s.birthday)
-            .sort((a, b) => a > b ? 1 : -1)
-            .find(_s => true),
-
-        oldestMale: (await getAllSwimmers())
+        youngestMale: swimmersMale
             .filter(s => s.status !== "ANNOUNCED")
             .filter(s => s.publishName)
             .filter(s => s.gender === "M")
             .filter(s => s.birthday)
             .sort((a, b) => a > b ? -1 : 1)
             .find(_s => true),
-
-        oldestFemale: (await getAllSwimmers())
+        youngestFemale: swimmersFemale
             .filter(s => s.status !== "ANNOUNCED")
             .filter(s => s.publishName)
             .filter(s => s.gender === "W")
             .filter(s => s.birthday)
             .sort((a, b) => a > b ? -1 : 1)
+            .find(_s => true),
+
+        oldestMale: swimmersMale
+            .filter(s => s.status !== "ANNOUNCED")
+            .filter(s => s.publishName)
+            .filter(s => s.gender === "M")
+            .filter(s => s.birthday)
+            .sort((a, b) => a > b ? 1 : -1)
+            .find(_s => true),
+
+        oldestFemale: swimmersFemale
+            .filter(s => s.status !== "ANNOUNCED")
+            .filter(s => s.publishName)
+            .filter(s => s.gender === "W")
+            .filter(s => s.birthday)
+            .sort((a, b) => a > b ? 1 : -1)
             .find(_s => true),
     }
 }
