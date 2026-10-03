@@ -13,8 +13,8 @@ export async function SwimmerList({ swimmers, noTeam }: { noTeam?: boolean, swim
             <div className="flex-3">Vorname</div>
             <div className="flex-3">Nachname</div>
             <div className="flex-1 hidden md:block">Frühstück</div>
-            <div className="flex-3 hidden md:block">Registierung</div>
-            <div className="flex-3 hidden md:block">Geburtstag</div>
+            <div className="flex-2 hidden md:block">Registierung</div>
+            <div className="flex-2 hidden md:block">Geburtstag</div>
         </div>
         {Promise.all(swimmers.map(async (swimmer) => {
             const birthday = swimmer.birthday ? new Date(swimmer.birthday) : undefined;
@@ -29,9 +29,9 @@ export async function SwimmerList({ swimmers, noTeam }: { noTeam?: boolean, swim
                         <div className="flex-3">{swimmer.lastName}</div>
                         <div className="flex-1 hidden md:block">{swimmer.breakfast ? "Ja": ""}</div>
                         {swimmer.capColor && swimmer.capNr ?
-                            <div className={`flex-3 hidden rounded-md md:block ${colorForCapColor(swimmer.capColor || "WHITE")} ${borderColorForCapColor(swimmer.capColor || "WHITE")}`}>{capColorToReadable(swimmer.capColor || "WHITE")}-{swimmer.capNr} (Reg:{swimmer.regNr})</div>
-                            : <div className="flex-3"></div>}
-                        <div className="flex-3 hidden md:block">{birthday && dateToGermanDate(birthday)} {birthday && <>({getAge(birthday)})</>}</div>
+                            <div className={`flex-2 hidden rounded-md md:block ${colorForCapColor(swimmer.capColor || "WHITE")} ${borderColorForCapColor(swimmer.capColor || "WHITE")}`}>{capColorToReadable(swimmer.capColor || "WHITE")}-{swimmer.capNr} (Reg:{swimmer.regNr})</div>
+                            : <div className="flex-2"></div>}
+                        <div className="flex-2 hidden md:block">{birthday && dateToGermanDate(birthday)} {birthday && <>({getAge(birthday)})</>}</div>
                     </div>
                 </div>
             </Link>
