@@ -53,7 +53,7 @@ function Result({ title, swimmers, night }: {
             <div>{++i}</div>
             <div>{swimmer.publishName ? swimmer.lastName : ""}</div>
             <div>{swimmer.publishName ? swimmer.firstName : ""}</div>
-            <div>{night ? swimmer.night : swimmer.total}m</div>
+            <div>{(night ? swimmer.night : swimmer.total).toLocaleString('de-DE')}m</div>
         </div>))}
     </div>
 }
@@ -78,7 +78,7 @@ function TeamResult({ title, teams, average }: {
             <div>{++i}</div>
             <div>{team.name}</div>
             <div>{team.swimmerCount}</div>
-            <div>{average ? Math.floor(team.total / team.swimmerCount) : team.total}m</div>
+            <div>{(average ? Math.floor(team.total / team.swimmerCount) : team.total).toLocaleString('de-DE')}m</div>
         </div>))}
     </div>
 }
