@@ -45,7 +45,7 @@ export default async function RankPage() {
         <Result title="Männlich 46 bis 55" swimmers={results.swimmersMale46} />
         <Result title="Männlich 56 bis 65" swimmers={results.swimmersMale56} />
         <Result title="Männlich 66 bis 75" swimmers={results.swimmersMale66} />
-        <Result title="Männlich 75 bis 100" swimmers={results.swimmersMale76} />
+        <Result title="Männlich 75 bis 99" swimmers={results.swimmersMale76} />
 
         <Result title="Weiblich 15 bis 18" swimmers={results.swimmersFemale15} />
         <Result title="Weiblich 18 bis 25" swimmers={results.swimmersFemale18} />
@@ -54,7 +54,7 @@ export default async function RankPage() {
         <Result title="Weiblich 46 bis 55" swimmers={results.swimmersFemale46} />
         <Result title="Weiblich 56 bis 65" swimmers={results.swimmersFemale56} />
         <Result title="Weiblich 66 bis 75" swimmers={results.swimmersFemale66} />
-        <Result title="Weiblich 75 bis 100" swimmers={results.swimmersFemale76} />
+        <Result title="Weiblich 75 bis 99" swimmers={results.swimmersFemale76} />
 
         <TeamResult title="Weiteste Strecke Team" teams={results.teams} />
         <TeamResult title="Weitester Durchschnitt Team" teams={results.teamsAvg} average />
