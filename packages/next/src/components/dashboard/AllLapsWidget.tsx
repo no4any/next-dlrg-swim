@@ -4,12 +4,14 @@ import { getAllLapsCards } from "@/src/mongo/lapsCards.mongo";
 
 export async function AllLapsWidget() {
     const cards = await getAllLapsCards();
-    
-    const lapsTotal = cards.reduce((value, current) => {return value + current.laps}, 0);
+
+    const lapsTotal = cards.reduce((value, current) => { return value + current.laps }, 0);
+    const lapsNightCup = cards.filter(c => c.isNightCup).reduce((value, current) => { return value + current.laps }, 0);
 
     return <Widget title="Bahnen">
-        <div className="text-8xl text-center md:pt-10">
-            {lapsTotal}
-        </div>
+        <div className="text-center">Gesamt</div>
+        <div className="text-8xl text-center">{lapsTotal}</div>
+        <div className="text-center">Nachtpokal</div>
+        <div className="text-4xl text-center">{lapsNightCup}</div>
     </Widget>
 }
