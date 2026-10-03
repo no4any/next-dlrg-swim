@@ -12,7 +12,7 @@ export async function SwimmerList({ swimmers, noTeam }: { noTeam?: boolean, swim
             <div className="flex-1">Tags</div>
             <div className="flex-3">Vorname</div>
             <div className="flex-3">Nachname</div>
-            {!noTeam && <div className="flex-3 hidden md:block">Team</div>}
+            <div className="flex-1 hidden md:block">Frühstück</div>
             <div className="flex-3 hidden md:block">Registierung</div>
             <div className="flex-3 hidden md:block">Geburtstag</div>
         </div>
@@ -28,7 +28,7 @@ export async function SwimmerList({ swimmers, noTeam }: { noTeam?: boolean, swim
                         </div>
                         <div className="flex-3">{swimmer.firstName}</div>
                         <div className="flex-3">{swimmer.lastName}</div>
-                        {!noTeam && <div className="flex-3 hidden md:block">{teamname ?? <span className="italic text-dlrg-gray">Kein Team</span>}</div>}
+                        <div className="flex-1 hidden md:block">{swimmer.breakfast ? "Ja": ""}</div>
                         {swimmer.capColor && swimmer.capNr ?
                             <div className={`flex-3 hidden rounded-md md:block ${colorForCapColor(swimmer.capColor || "WHITE")} ${borderColorForCapColor(swimmer.capColor || "WHITE")}`}>{capColorToReadable(swimmer.capColor || "WHITE")}-{swimmer.capNr} (Reg:{swimmer.regNr})</div>
                             : <div className="flex-3"></div>}
