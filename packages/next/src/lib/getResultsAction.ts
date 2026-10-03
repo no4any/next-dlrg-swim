@@ -99,14 +99,14 @@ export default async function getResultsAction() {
             .filter(s => s.publishName)
             .filter(s => s.gender === "M")
             .filter(s => s.birthday)
-            .sort((a, b) => a > b ? -1 : 1)
+            .sort((a, b) => (a.birthday as string) > (b.birthday as string) ? -1 : 1)
             .find(_s => true),
         youngestFemale: swimmersFemale
             .filter(s => s.status !== "ANNOUNCED")
             .filter(s => s.publishName)
             .filter(s => s.gender === "W")
             .filter(s => s.birthday)
-            .sort((a, b) => a > b ? -1 : 1)
+            .sort((a, b) => (a.birthday as string) > (b.birthday as string) ? -1 : 1)
             .find(_s => true),
 
         oldestMale: swimmersMale
@@ -114,7 +114,7 @@ export default async function getResultsAction() {
             .filter(s => s.publishName)
             .filter(s => s.gender === "M")
             .filter(s => s.birthday)
-            .sort((a, b) => a > b ? 1 : -1)
+            .sort((a, b) => (a.birthday as string) > (b.birthday as string) ? 1 : -1)
             .find(_s => true),
 
         oldestFemale: swimmersFemale
@@ -122,7 +122,7 @@ export default async function getResultsAction() {
             .filter(s => s.publishName)
             .filter(s => s.gender === "W")
             .filter(s => s.birthday)
-            .sort((a, b) => a > b ? 1 : -1)
+            .sort((a, b) => (a.birthday as string) > (b.birthday as string) ? 1 : -1)
             .find(_s => true),
     }
 }
