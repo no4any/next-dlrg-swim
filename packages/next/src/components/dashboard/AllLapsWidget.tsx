@@ -12,9 +12,9 @@ export async function AllLapsWidget() {
     return <Link prefetch={false} href="/admin/results">
         <Widget title="Bahnen">
             <div className="text-center">Gesamt</div>
-            <div className="text-8xl text-center">{lapsTotal}</div>
+            <div className="text-8xl text-center">{lapsTotal}.toLocaleString('de-DE')</div>
             <div className="text-center">Nachtpokal</div>
-            <div className="text-4xl text-center">{lapsNightCup}</div>
+            <div className="text-4xl text-center">{lapsNightCup}.toLocaleString('de-DE')</div>
         </Widget>
     </Link>
 }
