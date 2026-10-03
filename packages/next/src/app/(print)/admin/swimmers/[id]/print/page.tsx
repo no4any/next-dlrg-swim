@@ -27,7 +27,7 @@ export default async function ChildrenCert({ params }: { params: Promise<{ id: s
         <div className="page">
             <h1>Urkunde</h1>
             <h2>{swimmer.firstName} {swimmer.lastName}</h2>
-            <p>ist beim 24 Stunden-Schwimmen der DLRG KG Gießen e.V. vom 04. bis 05. Oktober 2025 im Westbad Gießen</p>
+            <p>ist beim 24 Stunden-Schwimmen der DLRG KG Gießen e.V. vom 03. bis 04. Oktober 2026 im Westbad Gießen</p>
             <h3>{distance} m</h3>
             <p>geschwommen und hat damit in der Altersklasse {getAge(birthday)}</p>
             <h3>{medal}</h3>

@@ -31,7 +31,7 @@ function TeamCert({ title, team, rank }: { rank: number, title: string, team: Te
         <h3>{rank}. Platz</h3>
         <p className="for">für das Team</p>
         <h4>{team.name}</h4>
-        <p>beim 24 Stunden-Schwimmen der DLRG KG Gießen e.V. vom 04. bis 05. Oktober 2025 im Westbad Gießen</p>
+        <p>beim 24 Stunden-Schwimmen der DLRG KG Gießen e.V. vom 03. bis 04. Oktober 2026 im Westbad Gießen</p>
     </div>
 }
 
