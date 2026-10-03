@@ -81,7 +81,7 @@ function SingleResult({ title, swimmer, night }: {
         <div className="grid grid-cols-4">
             <div>{swimmer.publishName ? swimmer.lastName : ""}</div>
             <div>{swimmer.publishName ? swimmer.firstName : ""}</div>
-            <div>{dateToGermanDate(new Date(swimmer.birthday as string))} ({swimmer.age})</div>
+            {swimmer.birthday ? <div>{dateToGermanDate(new Date(swimmer.birthday as string))} <span className="font-bold">({swimmer.age})</span></div> : <div></div>}
             <div>{(night ? swimmer.night : swimmer.total).toLocaleString('de-DE')}m</div>
         </div>
     </div>
@@ -109,7 +109,7 @@ function Result({ title, swimmers, night }: {
             <div>{++i}</div>
             <div>{swimmer.publishName ? swimmer.lastName : ""}</div>
             <div>{swimmer.publishName ? swimmer.firstName : ""}</div>
-            <div>{swimmer.age}</div>
+            {swimmer.birthday ? <div>{dateToGermanDate(new Date(swimmer.birthday as string))} <span className="font-bold">({swimmer.age})</span></div> : <div></div>}
             <div>{(night ? swimmer.night : swimmer.total).toLocaleString('de-DE')}m</div>
         </div>))}
     </div>
