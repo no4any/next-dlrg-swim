@@ -15,7 +15,7 @@ export function SwimmerLapsDetails({laps}:{laps?: LapsCard[] | null}) {
             <div className="flex-1">{lap.id}</div>
             <div className="flex-1">{lap.isNightCup && "Nachtpokal"}</div>
             <div className="flex-1">{lap.editor}</div>
-            <div className="flex-1">{lap.laps}</div>
+            <div className="flex-1">{lap.laps % 2 !== 0 ? <span className="text-dlrg-red font-bold">!!!</span> : <></>} {lap.laps}</div>
         </div>
         </Link>)}
     </div>
