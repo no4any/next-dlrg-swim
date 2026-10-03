@@ -18,7 +18,6 @@ export async function SwimmerList({ swimmers, noTeam }: { noTeam?: boolean, swim
         </div>
         {Promise.all(swimmers.map(async (swimmer) => {
             const birthday = swimmer.birthday ? new Date(swimmer.birthday) : undefined;
-            const teamname = swimmer.team ? swimmer.team.name : undefined;
             const distance = await calcLaps(await getLapsCards(swimmer._id)) * 50;
             return <Link prefetch={false} href={`/admin/swimmers/${swimmer._id?.toString() ?? '12312312'}`} key={swimmer._id?.toString()}>
                 <div>
