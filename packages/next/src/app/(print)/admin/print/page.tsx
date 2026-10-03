@@ -9,7 +9,7 @@ async function PlainCert({ title, swimmer }: { title: string, swimmer: Swimmer }
         <h2>{title}</h2>
         <p className="for">für</p>
         <h4>{swimmer.firstName} {swimmer.lastName}</h4>
-        <p>beim 24 Stunden-Schwimmen der DLRG KG Gießen e.V. vom 04. bis 05. Oktober 2025 im Westbad Gießen</p>
+        <p>beim 24 Stunden-Schwimmen der DLRG KG Gießen e.V. vom 03. bis 4. Oktober 2026 im Westbad Gießen</p>
     </div>
 }
 
@@ -20,7 +20,7 @@ async function RankedCert({ title, swimmer, rank }: { title: string, rank: numbe
         <h3>{rank}. Platz</h3>
         <p className="for">für</p>
         <h4>{swimmer.firstName} {swimmer.lastName}</h4>
-        <p>beim 24 Stunden-Schwimmen der DLRG KG Gießen e.V. vom 04. bis 05. Oktober 2025 im Westbad Gießen</p>
+        <p>beim 24 Stunden-Schwimmen der DLRG KG Gießen e.V. vom 03. bis 04. Oktober 2026 im Westbad Gießen</p>
     </div>
 }
 
@@ -42,21 +42,39 @@ export default async function ResultsPrintPage() {
 
     const results = await getResultsAction();
 
+    const swimmersMale = results.swimmersMale.slice(0, 3);
+    const swimmersFemale = results.swimmersFemale.slice(0, 3);
+
+    const swimmersMaleNight = results.swimmersMaleNight.slice(0, 3);
+    const swimmersFemaleNight = results.swimmersFemaleNight.slice(0, 3);
+
     return <div className="print">
         {results.swimmerYoungestMale ? <PlainCert swimmer={results.swimmerYoungestMale} title="Jüngster Teilnehmer" /> : <></>}
         {results.swimmerYoungestFemale ? <PlainCert swimmer={results.swimmerYoungestFemale} title="Jüngste Teilnehmerin" /> : <></>}
         {results.swimmerOldestMale ? <PlainCert swimmer={results.swimmerOldestMale} title="Ältester Teilnehmer" /> : <></>}
         {results.swimmerOldestFemale ? <PlainCert swimmer={results.swimmerOldestFemale} title="Älteste Teilnehmerin" /> : <></>}
         
-        <div className="page"><h1>Weiteste Strecke männlich</h1></div>
-        {results.swimmersMale.slice(0, 3).map((swimmer, i) => <RankedCert key={i} rank={++i} title="Weiteste Strecke" swimmer={swimmer} />)}
-        <div className="page"><h1>Weiteste Strecke weiblich</h1></div>
-        {results.swimmersFemale.slice(0, 3).map((swimmer, i) => <RankedCert key={i} rank={++i} title="Weiteste Strecke" swimmer={swimmer} />)}
+        <div className="page">
+            <h1>Weiteste Strecke männlich</h1>
+            {swimmersMale.map(s => <p key={s._id.toString()}>{s.firstName} {s.lastName}: {s.total.toLocaleString('de-DE')}m</p>)}
+        </div>
+        {swimmersMale.slice(0, 3).map((swimmer, i) => <RankedCert key={i} rank={++i} title="Weiteste Strecke" swimmer={swimmer} />)}
+        <div className="page">
+            <h1>Weiteste Strecke weiblich</h1>
+            {swimmersFemale.map(s => <p key={s._id.toString()}>{s.firstName} {s.lastName}: {s.total.toLocaleString('de-DE')}m</p>)}
+        </div>
+        {swimmersFemale.slice(0, 3).map((swimmer, i) => <RankedCert key={i} rank={++i} title="Weiteste Strecke" swimmer={swimmer} />)}
 
-        <div className="page"><h1>Nachtpokal männlich</h1></div>
-        {results.swimmersMaleNight.slice(0, 3).map((swimmer, i) => <RankedCert key={i} rank={++i} title="Nachtpokal" swimmer={swimmer} />)}
-        <div className="page"><h1>Nachtpokal weiblich</h1></div>
-        {results.swimmersFemaleNight.slice(0, 3).map((swimmer, i) => <RankedCert key={i} rank={++i} title="Nachtpokal" swimmer={swimmer} />)}
+        <div className="page">
+            <h1>Nachtpokal männlich</h1>
+            {swimmersMaleNight.map(s => <p key={s._id.toString()}>{s.firstName} {s.lastName}: {s.total.toLocaleString('de-DE')}m</p>)}
+        </div>
+        {swimmersMaleNight.slice(0, 3).map((swimmer, i) => <RankedCert key={i} rank={++i} title="Nachtpokal" swimmer={swimmer} />)}
+        <div className="page">
+            <h1>Nachtpokal männlich</h1>
+            {swimmersFemaleNight.map(s => <p key={s._id.toString()}>{s.firstName} {s.lastName}: {s.total.toLocaleString('de-DE')}m</p>)}
+        </div>
+        {swimmersFemaleNight.slice(0, 3).map((swimmer, i) => <RankedCert key={i} rank={++i} title="Nachtpokal" swimmer={swimmer} />)}
 
         <div className="page"><h1>Altergruppe 15 bis 17 männlich</h1></div>
         {results.swimmersMale15.slice(0,3).map((swimmer, i) => <RankedCert key={i} rank={++i} title="Weiteste Strecke in der Altersgruppe 15 bis 17 Jahre" swimmer={swimmer} />)}

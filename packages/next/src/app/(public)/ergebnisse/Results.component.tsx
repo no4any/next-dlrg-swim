@@ -4,17 +4,10 @@ import { getAllTeamsWithResult } from "@/src/mongo/team.mongo";
 import { dateToGermanDateWithTime } from "./page";
 import { cacheLife } from "next/cache";
 
-const FIVE_MINUTES = 300;
-
 export async function Results() {
     "use cache"
 
-    //cacheLife('minutes')
-    cacheLife({
-        stale: FIVE_MINUTES,
-        expire: FIVE_MINUTES,
-        revalidate: FIVE_MINUTES
-    })
+    cacheLife("minutes");
 
     function name(swimmer: Swimmer) {
         return `${swimmer.lastName}, ${swimmer.firstName}`
@@ -25,7 +18,7 @@ export async function Results() {
 
     return <div>
         <h1>Ergebnisse</h1>
-        <div className="my-4"><span className="font-bold">Letzte Aktualisierung:</span><span className="italic">{dateToGermanDateWithTime()}</span></div>
+        <div className="my-4"><span className="font-bold">Letzte Aktualisierung:</span><span className="italic">{dateToGermanDateWithTime(new Date(Date.now()))}</span></div>
         <div>
             <h1>Teams</h1>
             <div className="flex flex-row gap-4 font-bold">

@@ -3,7 +3,7 @@ import { Results } from "./Results.component";
 import { Spinner } from "../../(admin)/admin/Spinner";
 import { connection } from "next/server";
 
-export function dateToGermanDateWithTime(date: Date = new Date()) {
+export function dateToGermanDateWithTime(date: Date) {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
