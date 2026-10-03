@@ -12,7 +12,7 @@ export default async function UpdateSwimmerPage({ params }: { params: Promise<{ 
 
     const { id } = await params;
     const swimmer = await flat(await getSwimmer(id));
-    const teams = await flat(await getAllTeams());
+    const teams = await flat((await getAllTeams()).sort((a, b) => a.name.localeCompare(b.name)));
     
     if(!swimmer) notFound();
     if(swimmer.type === "MANAGED") notFound();
