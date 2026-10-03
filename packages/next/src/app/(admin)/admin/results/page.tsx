@@ -33,8 +33,10 @@ export default async function RankPage() {
         {results.oldestFemale && <SingleResult title="Ältester Teilnehmer (weiblich)" swimmer={results.oldestFemale} />}
 
         <Result title="Weiteste Strecke" swimmers={results.swimmers}></Result>
+        
         <Result title="Weiteste Strecke männlich" swimmers={results.swimmersMale}></Result>
         <Result title="Weiteste Strecke weiblich" swimmers={results.swimmersFemale}></Result>
+
         <Result title="Weiteste Strecke Nachtpokal männlich" swimmers={results.swimmersMaleNight} night></Result>
         <Result title="Weiteste Strecke Nachtpokal weiblich" swimmers={results.swimmersFemaleNight} night></Result>
 
@@ -58,6 +60,18 @@ export default async function RankPage() {
 
         <TeamResult title="Weiteste Strecke Team" teams={results.teams} />
         <TeamResult title="Weitester Durchschnitt Team" teams={results.teamsAvg} average />
+
+        <TeamResult title="Weiteste Strecke Team (Sonstige)" teams={results.teams.filter(t => t.teamType === "SONSTIGE")} />
+        <TeamResult title="Weitester Durchschnitt Team (Sonstige" teams={results.teamsAvg.filter(t => t.teamType === "SONSTIGE")} average />
+
+        <TeamResult title="Weiteste Strecke Team (Verein)" teams={results.teams.filter(t => t.teamType === "VEREIN")} />
+        <TeamResult title="Weitester Durchschnitt Team (Verein" teams={results.teamsAvg.filter(t => t.teamType === "VEREIN")} average />
+
+        <TeamResult title="Weiteste Strecke Team (Schwimmverein)" teams={results.teams.filter(t => t.teamType === "SCHWIMMVEREIN")} />
+        <TeamResult title="Weitester Durchschnitt Team (Schwimmverein)" teams={results.teamsAvg.filter(t => t.teamType === "SCHWIMMVEREIN")} average />
+
+        <TeamResult title="Weiteste Strecke Team (Firma)" teams={results.teams.filter(t => t.teamType === "FIRMA")} />
+        <TeamResult title="Weitester Durchschnitt Team (Firma)" teams={results.teamsAvg.filter(t => t.teamType === "FIRMA")} average />
     </div>
 }
 
