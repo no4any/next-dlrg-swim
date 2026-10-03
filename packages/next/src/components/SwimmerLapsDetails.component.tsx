@@ -13,7 +13,7 @@ export function SwimmerLapsDetails({laps}:{laps?: LapsCard[] | null}) {
         </div>
         {laps.map((lap, index) => <Link href={`/admin/loggings/${lap.id}`} key={lap.id} ><div className="flex flex-row gap-0-5 hover:bg-gray-200 rounded-md p-1">
             <div className="flex-1">{lap.id}</div>
-            <div className="flex-1">{lap.isNightCup && "Nachpokal"}</div>
+            <div className="flex-1">{lap.isNightCup && "Nachtpokal"}</div>
             <div className="flex-1">{lap.editor}</div>
             <div className="flex-1">{lap.laps}</div>
         </div>
