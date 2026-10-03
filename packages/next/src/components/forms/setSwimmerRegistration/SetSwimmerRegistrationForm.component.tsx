@@ -22,12 +22,12 @@ export function SetSwimmerRegistrationForm({ swimmer, action, withReset }: { wit
             {state.errors && state.errors.map((error, i) => <Hint type="ERROR" key={i}>{error}</Hint>)}
         </HintBox>
         <Form action={formAction}>
-            <ColorSelect title="Farbe der Badekappe" name="color" disabled={pending} selected={swimmer.capColor ?? undefined}/>
+            <ColorSelect title="Farbe der Badekappe" name="color" disabled={pending} selected={swimmer.capColor ?? undefined} />
             <input type="hidden" name="id" title="ID des Schwimmers" value={swimmer._id} />
             <Input type="number" name="capNr" title="Nummer der Badekappe" min={1} max={100} disabled={pending} defaultValue={swimmer.capNr ?? undefined} />
             <Input type="number" name="regNr" title="Nummer auf dem Bändchen (die letzten 3 Ziffern)" min={1} max={999} disabled={pending} defaultValue={swimmer.regNr ?? undefined} />
             {withReset && <ResetButton className="w-full mt-3">Zurücksetzen</ResetButton>}
-            <SubmitButton className="w-full mt-3">Registrieren</SubmitButton>
+            <SubmitButton className="w-full mt-3">Registrieren ({swimmer.breakfast ? 19 : 12 }€)</SubmitButton>
         </Form>
     </div>
 }
