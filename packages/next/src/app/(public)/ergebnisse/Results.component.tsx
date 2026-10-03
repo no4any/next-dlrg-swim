@@ -1,3 +1,5 @@
+"use cache"
+
 import { Swimmer } from "@/src/model";
 import { getAllSwimmersWithResults } from "@/src/mongo/swimmer.mongo";
 import { getAllTeamsWithResult } from "@/src/mongo/team.mongo";
@@ -5,8 +7,6 @@ import { dateToGermanDateWithTime } from "./page";
 import { cacheLife } from "next/cache";
 
 export async function Results() {
-    "use cache"
-
     cacheLife("minutes");
 
     function name(swimmer: Swimmer) {

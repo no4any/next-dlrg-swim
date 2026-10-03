@@ -7,7 +7,7 @@ export function dateToGermanDateWithTime(date: Date) {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    const hours = date.getHours();
+    const hours = date.getHours() + 2;
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
     return `${leadingZero(day)}.${leadingZero(month)}.${year} um ${leadingZero(hours)}:${leadingZero(minutes)}:${leadingZero(seconds)}`;
