@@ -1,5 +1,6 @@
 import getResultsAction from "@/src/lib/getResultsAction";
 import { Swimmer, Team } from "@/src/model";
+import Link from "next/link";
 import { connection } from "next/server";
 
 function dateToString(date: Date) {
@@ -20,6 +21,10 @@ export default async function RankPage() {
         <h1>Ergebnisse</h1>
 
         <div className="mt-3">Stand: {dateToString(new Date)}</div>
+
+        <div>
+            <Link prefetch={false} href="/admin/print"><h3 className="text-dlrg-red">Urkunden drucken</h3></Link>
+        </div>
 
         <Result title="Weiteste Strecke" swimmers={results.swimmers}></Result>
         <Result title="Weiteste Strecke männlich" swimmers={results.swimmersMale}></Result>
