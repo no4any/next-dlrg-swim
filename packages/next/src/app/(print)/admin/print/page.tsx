@@ -73,7 +73,7 @@ export default async function ResultsPrintPage() {
         {results.swimmerOldestFemale ? <PlainCert swimmer={results.swimmerOldestFemale} title="Älteste Teilnehmerin" /> : <></>}
 
         <RankedCertRanking group="Weiteste Strecke männlich" title="Weiteste Strecke" swimmers={results.swimmersMale} />
-        <RankedCertRanking group="Weiteste Strecke wiblich" title="Weiteste Strecke" swimmers={results.swimmersFemale} />
+        <RankedCertRanking group="Weiteste Strecke weiblich" title="Weiteste Strecke" swimmers={results.swimmersFemale} />
 
         <RankedCertRanking group="Nachtpokal männlich" title="Nachtpokal" swimmers={results.swimmersMaleNight} nightCup />
         <RankedCertRanking group="Nachtpokal weiblich" title="Nachtpokal" swimmers={results.swimmersFemaleNight} nightCup />
@@ -100,9 +100,9 @@ export default async function ResultsPrintPage() {
         <TeamCertRanking group="Beste Leistung im Durchschnitt sonstiger Teams" title="Beste Leistung im Durchschnitt sonstiger Teams" teams={results.teams.filter(t => t.teamType === "SONSTIGE")} average />
 
         <TeamCertRanking group="Beste Leistung eines Firmenteam" title="Beste Leistung eines Firmenteams" teams={results.teams.filter(t => t.teamType === "FIRMA")} />
-        <TeamCertRanking group="Beste Leistung im Durchschnitt eines Firmenteam" title="Beste Leistung im Durchschnitt eines Firmenteams" teams={results.teams.filter(t => t.teamType === "FIRMA")} average />
+        <TeamCertRanking group="Beste Leistung im Durchschnitt eines Firmenteams" title="Beste Leistung im Durchschnitt eines Firmenteams" teams={results.teams.filter(t => t.teamType === "FIRMA")} average />
 
-        <TeamCertRanking group="Beste Leistung eines Schwimmvereinsteams" title="Beste Leistung eines Schwimmvereinsteams" teams={results.teams.filter(t => t.teamType === "SCHWIMMVEREIN")} />
-        <TeamCertRanking group="Beste Leistung im Durchschnitt eines Schwimmvereinsteams" title="Beste Leistung im Durchschnitt eines Schwimmvereinsteams" teams={results.teams.filter(t => t.teamType === "SCHWIMMVEREIN")} average />
+        <TeamCertRanking group="Beste Leistung eines Schwimmvereins" title="Beste Leistung eines Schwimmvereins" teams={results.teams.filter(t => t.teamType === "SCHWIMMVEREIN")} />
+        <TeamCertRanking group="Beste Leistung im Durchschnitt eines Schwimmvereins" title="Beste Leistung im Durchschnitt eines Schwimmvereins" teams={results.teams.filter(t => t.teamType === "SCHWIMMVEREIN")} average />
     </div>
 }
