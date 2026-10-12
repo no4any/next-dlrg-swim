@@ -97,12 +97,12 @@ export default async function ResultsPrintPage() {
         <RankedCertRanking group="Altergruppe 76 bis 99 weiblich" title="Weiteste Strecke in der Altersgruppe 76 bis 99 Jahre" swimmers={results.swimmersFemale76} />
 
         <TeamCertRanking group="Beste Leistung sonstiger Teams" title="Beste Leistung sonstiger Teams" teams={results.teams.filter(t => t.teamType === "SONSTIGE")} />
-        <TeamCertRanking group="Beste Leistung im Durchschnitt sonstiger Teams" title="Beste Leistung im Durchschnitt sonstiger Teams" teams={results.teams.filter(t => t.teamType === "SONSTIGE")} average />
+        <TeamCertRanking group="Beste Leistung im Durchschnitt sonstiger Teams" title="Beste Leistung im Durchschnitt sonstiger Teams" teams={results.teamsAvg.filter(t => t.teamType === "SONSTIGE")} average />
 
         <TeamCertRanking group="Beste Leistung eines Firmenteam" title="Beste Leistung eines Firmenteams" teams={results.teams.filter(t => t.teamType === "FIRMA")} />
-        <TeamCertRanking group="Beste Leistung im Durchschnitt eines Firmenteams" title="Beste Leistung im Durchschnitt eines Firmenteams" teams={results.teams.filter(t => t.teamType === "FIRMA")} average />
+        <TeamCertRanking group="Beste Leistung im Durchschnitt eines Firmenteams" title="Beste Leistung im Durchschnitt eines Firmenteams" teams={results.teamsAvg.filter(t => t.teamType === "FIRMA")} average />
 
         <TeamCertRanking group="Beste Leistung eines Schwimmvereins" title="Beste Leistung eines Schwimmvereins" teams={results.teams.filter(t => t.teamType === "SCHWIMMVEREIN")} />
-        <TeamCertRanking group="Beste Leistung im Durchschnitt eines Schwimmvereins" title="Beste Leistung im Durchschnitt eines Schwimmvereins" teams={results.teams.filter(t => t.teamType === "SCHWIMMVEREIN")} average />
+        <TeamCertRanking group="Beste Leistung im Durchschnitt eines Schwimmvereins" title="Beste Leistung im Durchschnitt eines Schwimmvereins" teams={results.teamsAvg.filter(t => t.teamType === "SCHWIMMVEREIN")} average />
     </div>
 }
